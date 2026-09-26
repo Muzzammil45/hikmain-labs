@@ -67,8 +67,10 @@ export function TextArea({ label, name, required, hint, error, rows = 5, ...rest
   )
 }
 
-export function SelectField({ label, name, options, required, hint, error, placeholder, ...rest }) {
+export function SelectField({ label, name, options, required, hint, error, placeholder, value, defaultValue, ...rest }) {
   const id = useId()
+  // Works controlled (value) or uncontrolled (defaultValue); never both.
+  const valueProps = value !== undefined ? { value } : { defaultValue: defaultValue ?? '' }
   return (
     <Wrapper id={id} label={label} required={required} hint={hint} error={error}>
       <select
@@ -77,7 +79,7 @@ export function SelectField({ label, name, options, required, hint, error, place
         className={inputClass}
         aria-invalid={!!error}
         aria-describedby={describedBy(id, hint, error)}
-        defaultValue=""
+        {...valueProps}
         {...rest}
       >
         {placeholder && (

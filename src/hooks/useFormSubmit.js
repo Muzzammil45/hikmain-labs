@@ -39,6 +39,12 @@ export default function useFormSubmit({ endpoint, validate }) {
       return
     }
 
+    // Turnstile must have issued a token (the widget adds this hidden field on success).
+    if (site.forms.captchaSiteKey && !data.get('cf-turnstile-response')) {
+      setFormError('Please complete the security check above, then press submit again.')
+      return
+    }
+
     if (!endpoint) {
       setStatus('error')
       setFormError(

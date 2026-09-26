@@ -1,4 +1,5 @@
-import { useEffect, useRef } from 'react'
+import { useState } from 'react'
+import { Turnstile } from '@marsidev/react-turnstile'
 import { site } from '../../config/site'
 
 /**
@@ -16,24 +17,34 @@ export function Honeypot() {
   )
 }
 
-/** Optional Cloudflare Turnstile widget, rendered only if a site key is configured. */
+/**
+ * Cloudflare Turnstile security check. On success the widget adds a hidden
+ * "cf-turnstile-response" field to the surrounding <form>, which the submit hook
+ * requires before sending, and which is forwarded with the submission.
+ */
 export function Captcha() {
-  const ref = useRef(null)
-  const key = site.forms.captchaSiteKey
+  const [error, setError] = useState('')
+  const siteKey = site.forms.captchaSiteKey
+  if (!siteKey) return null
 
-  useEffect(() => {
-    if (!key || !ref.current) return
-    const render = () => window.turnstile?.render(ref.current, { sitekey: key })
-    if (window.turnstile) {
-      render()
-      return
-    }
-    const script = document.createElement('script')
-    script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit'
-    script.async = true
-    script.onload = render
-    document.head.appendChild(script)
-  }, [key])
-
-  return key ? <div ref={ref} /> : null
+  return (
+    <div>
+      <Turnstile
+        siteKey={siteKey}
+        options={{ theme: 'light', size: 'flexible', language: 'en-gb' }}
+        onSuccess={() => setError('')}
+        onError={() =>
+          setError(
+            `The security check could not load. Please refresh the page, or email us at ${site.contact.email}.`,
+          )
+        }
+        onExpire={() => setError('')}
+      />
+      {error && (
+        <p role="alert" className="mt-2 text-sm font-medium text-red-700">
+          {error}
+        </p>
+      )}
+    </div>
+  )
 }

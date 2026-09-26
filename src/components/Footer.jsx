@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { site } from '../config/site'
+import { site, whatsappUrl } from '../config/site'
 
 export default function Footer() {
   return (
@@ -12,14 +12,36 @@ export default function Footer() {
               UK Registered | Company Number: {site.company.number} | Registered Office:{' '}
               {site.company.registeredOffice}
             </p>
-            <p className="mt-4 text-sm">
-              <a
-                href={`mailto:${site.contact.email}`}
-                className="font-medium text-white underline underline-offset-2 hover:text-teal-300"
-              >
-                {site.contact.email}
-              </a>
-            </p>
+            <ul className="mt-4 space-y-1 text-sm">
+              <li>
+                <a
+                  href={`mailto:${site.contact.email}`}
+                  className="font-medium text-white underline underline-offset-2 hover:text-teal-300"
+                >
+                  {site.contact.email}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={`tel:${site.contact.phone.replace(/\s/g, '')}`}
+                  className="font-medium text-white underline underline-offset-2 hover:text-teal-300"
+                >
+                  {site.contact.phone}
+                </a>
+              </li>
+              {whatsappUrl() && (
+                <li>
+                  <a
+                    href={whatsappUrl()}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-medium text-white underline underline-offset-2 hover:text-teal-300"
+                  >
+                    WhatsApp
+                  </a>
+                </li>
+              )}
+            </ul>
           </div>
 
           <nav aria-label="Legal and policies">

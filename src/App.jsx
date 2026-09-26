@@ -1,4 +1,4 @@
-import { Link, Route, Routes } from 'react-router-dom'
+﻿import { Link, Route, Routes } from 'react-router-dom'
 import Layout from './components/Layout'
 import Seo from './components/Seo'
 import Section from './components/Section'
@@ -10,7 +10,7 @@ import HowItWorks from './pages/HowItWorks'
 import About from './pages/About'
 import JoinNetwork from './pages/JoinNetwork'
 import Contact from './pages/Contact'
-import Policy from './pages/Policy'
+import Policies from './pages/Policies'
 
 const policySlugs = ['privacy', 'cookies', 'terms', 'academic-integrity', 'contractor-notice', 'accessibility']
 
@@ -39,7 +39,7 @@ export default function App() {
         <Route path="join" element={<JoinNetwork />} />
         <Route path="contact" element={<Contact />} />
         {policySlugs.map((slug) => (
-          <Route key={slug} path={slug} element={<Policy slug={slug} />} />
+          <Route key={slug} path={slug} element={<Policies slug={slug} />} />
         ))}
         <Route path="*" element={<NotFound />} />
       </Route>

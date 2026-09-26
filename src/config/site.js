@@ -6,6 +6,8 @@
  * forms all change together. Values in [SQUARE BRACKETS] are placeholders.
  */
 
+export const lastUpdated = '26 September 2026' // shown on every policy page
+
 export const site = {
   name: 'HIKMAIN Labs',
   legalName: 'HIKMAIN LABS LTD',
@@ -13,30 +15,39 @@ export const site = {
   tagline: 'Skilled support built around your project',
 
   company: {
-    number: '[TO BE UPDATED]',
-    registeredOffice: '[TO BE UPDATED]',
+    number: '17454287',
+    registeredOffice: '272 Wingrove Avenue, Newcastle Upon Tyne, NE4 9AA, United Kingdom',
   },
 
   contact: {
-    // Use a company-controlled address, not a personal one.
-    email: 'hello@example.com', // TODO: replace with company email
-    // International format, digits only, no "+" or spaces. e.g. 447700900123
-    whatsappNumber: '', // TODO: replace with WhatsApp Business number
+    email: 'hikmainlabs@gmail.com',
+    phone: '+44 7392 420327',
+    // International format, digits only, no "+" or spaces (used for wa.me links).
+    whatsappNumber: '447392420327',
     // Link to a Google Calendar appointment page, or leave blank to use email.
     googleMeetRequestUrl: '', // TODO: optional booking link
   },
 
-  // Form delivery. Both forms POST here. Create a form at https://formspree.io
-  // (or a compatible service), point it at the company inbox, and enable its
-  // auto-response for the contractor form so applicants get a confirmation email.
+  // Form delivery. Both forms POST to Formspree. The contractor form's
+  // auto-response (applicant confirmation email) is switched on in the Formspree dashboard.
   forms: {
-    contactEndpoint: '', // TODO: e.g. https://formspree.io/f/xxxxxxxx
-    applicationEndpoint: '', // TODO: e.g. https://formspree.io/f/yyyyyyyy
-    // Optional Cloudflare Turnstile / hCaptcha site key for extra spam protection.
-    captchaSiteKey: '',
+    contactEndpoint: 'https://formspree.io/f/xdekwbrj',
+    applicationEndpoint: 'https://formspree.io/f/maenpvrz',
+    // Cloudflare Turnstile site key. The env var lets local development use
+    // Cloudflare's test key, because the live key only works on the approved domain.
+    captchaSiteKey: import.meta.env.VITE_TURNSTILE_SITE_KEY || '0x4AAAAAFE+tIZmIuqnQMw1O',
   },
 
-  // Subjects advertised on the Tutoring page.
+  // Elevate Tuition: independent partner for school, GCSE and A Level tutoring.
+  elevate: {
+    name: 'Elevate Tuition',
+    url: 'https://elevatetuition.online/',
+    // Full wa.me link (with pre-filled message) to Elevate's WhatsApp.
+    whatsappUrl:
+      'https://wa.me/447533469509?text=Hi%20Elevate%20Tuition%2C%20I%20was%20referred%20through%20the%20HIKMAIN%20Labs%20website%20and%20would%20like%20to%20ask%20about%20tutoring.',
+  },
+
+  // University-level subjects advertised on the Tutoring page.
   tutoringSubjects: [
     {
       title: 'Maths and Statistics',

@@ -165,6 +165,14 @@ export default function JoinNetwork() {
                 ))}
               </Fieldset>
 
+              <p className="rounded-lg bg-surface p-3 text-sm leading-relaxed text-black/75">
+                We use the information in this application only to assess your suitability for our
+                contractor network and to contact you about it. Please don&rsquo;t include sensitive
+                personal documents. See our{' '}
+                <Link to="/privacy" className="text-action underline">Privacy Notice</Link> for how we handle your
+                data and your rights.
+              </p>
+
               <Captcha />
 
               {formError && (

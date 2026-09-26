@@ -18,7 +18,7 @@ const services = [
   { icon: 'data', title: 'AI and data project support', text: 'Human evaluation, feedback and data annotation to help AI and data projects stay accurate.', to: '/project-support' },
   { icon: 'task', title: 'Digital project assistance', text: 'Online research, information gathering and organisation, delivered clearly and on time.', to: '/project-support' },
   { icon: 'repeat', title: 'Ongoing weekly support', text: 'Recurring assignments with tracking and quality control for work that continues.', to: '/project-support' },
-  { icon: 'learn', title: 'Personalised tutoring', text: 'One-to-one and small-group learning support that focuses on genuine understanding.', to: '/tutoring' },
+  { icon: 'learn', title: 'Personalised tutoring', text: 'University-level tutoring from HIKMAIN Labs, with school and sixth-form support available through our partner, Elevate Tuition.', to: '/tutoring' },
 ]
 
 const reasons = [

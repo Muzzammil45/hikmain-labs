@@ -19,17 +19,41 @@ export default function Tutoring() {
     <>
       <Seo
         title="Tutoring"
-        description="Personalised one-to-one and small-group tutoring in maths, statistics, sciences and computer science, focused on genuine learning."
+        description="Personalised university tutoring from HIKMAIN Labs, with school, GCSE and A Level support through our independent partner, Elevate Tuition."
       />
       <PageHero
-        title="Personalised tutoring for genuine understanding"
-        intro="Learning support that adapts to you, delivered online by independent tutors from our managed network."
-      >
-        <Button to="/contact?service=Tutoring">Request Tutoring Support</Button>
-      </PageHero>
+        title="Personalised tutoring at every stage"
+        intro="HIKMAIN Labs provides personalised tutoring for university students. For school and pre-university support from KS1 to A Level, we work with Elevate Tuition, an independent tutoring partner."
+      />
 
       <Section>
-        <SectionHeading eyebrow="How we help" title="Ways to learn with us" />
+        <h2 className="sr-only">Choose your tutoring</h2>
+        <ul className="grid gap-6 md:grid-cols-2">
+          <li className="flex flex-col">
+            <Card title="University Tutoring" icon={<Icon name="learn" />} className="flex-1">
+              <p>One-to-one and small-group learning support that focuses on genuine understanding.</p>
+              <Button to="/contact?service=University tutoring" className="mt-6 w-full sm:w-auto">
+                Enquire About University Tutoring
+              </Button>
+            </Card>
+          </li>
+          <li className="flex flex-col">
+            <Card title="School, GCSE & A Level Tutoring" icon={<Icon name="group" />} className="flex-1">
+              <p>Expert pre-university support from KS1 to A Level, delivered by Elevate Tuition</p>
+              <Button href={site.elevate.url} variant="secondary" className="mt-6 w-full sm:w-auto">
+                Visit Elevate Tuition
+              </Button>
+            </Card>
+            <p className="mt-3 text-sm leading-relaxed text-black/70">
+              You will continue your enquiry directly with Elevate Tuition, which operates independently
+              and has its own pricing, terms and privacy policy.
+            </p>
+          </li>
+        </ul>
+      </Section>
+
+      <Section tone="surface">
+        <SectionHeading eyebrow="University tutoring" title="Ways to learn with us" />
         <ul className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {formats.map((f) => (
             <li key={f.title}>
@@ -41,9 +65,9 @@ export default function Tutoring() {
         </ul>
       </Section>
 
-      <Section tone="surface">
+      <Section>
         <SectionHeading
-          eyebrow="Subjects"
+          eyebrow="University subjects"
           title="What you can learn"
           intro="Not seeing your subject? Ask us. We will tell you honestly whether we can help."
         />
@@ -58,7 +82,7 @@ export default function Tutoring() {
         </ul>
       </Section>
 
-      <Section id="academic-integrity">
+      <Section tone="surface" id="academic-integrity">
         <div className="rounded-2xl border-2 border-accent bg-white p-6 shadow-sm sm:p-10">
           <div className="flex items-start gap-4">
             <span className="hidden h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-accent/10 text-accent sm:flex" aria-hidden="true">
@@ -76,19 +100,6 @@ export default function Tutoring() {
               </p>
             </div>
           </div>
-        </div>
-      </Section>
-
-      <Section tone="dark">
-        <div className="max-w-3xl">
-          <h2 className="text-3xl font-bold !text-white">Ready to get started?</h2>
-          <p className="mt-4 text-lg leading-relaxed text-white/90">
-            Tell us the subject, level and what you would like to achieve. We will discuss it with you
-            privately and agree the arrangements before any sessions begin.
-          </p>
-          <Button to="/contact?service=Tutoring" variant="light" className="mt-8">
-            Request Tutoring Support
-          </Button>
         </div>
       </Section>
     </>

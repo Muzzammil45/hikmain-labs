@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import Seo from '../components/Seo'
 import PageHero from '../components/PageHero'
@@ -9,10 +10,12 @@ import useFormSubmit, { isEmail } from '../hooks/useFormSubmit'
 import { Checkbox, SelectField, TextArea, TextField } from '../components/form/Fields'
 import { Captcha, Honeypot } from '../components/form/SpamProtection'
 
-const services = ['Project support', 'Tutoring', 'Contractor enquiry', 'General enquiry']
+const UNIVERSITY = 'University Tutoring'
+const SCHOOL = 'School, GCSE or A Level Tutoring'
+const services = ['Project support', UNIVERSITY, SCHOOL, 'Contractor enquiry', 'General enquiry']
 const methods = ['WhatsApp', 'Google Meet', 'Email']
 
-// Accept either "Tutoring" or "Project support" etc. from ?service=
+// Accept a service name (case-insensitive), e.g. ?service=University tutoring
 const matchService = (value) => services.find((s) => s.toLowerCase() === String(value || '').toLowerCase()) || ''
 
 function validate(data) {
@@ -40,6 +43,9 @@ export default function Contact() {
     validate,
   })
   const wa = whatsappUrl()
+  const [service, setService] = useState(() => matchService(params.get('service')))
+  const isSchool = service === SCHOOL
+  const elevateWhatsapp = site.elevate.whatsappUrl
 
   return (
     <>
@@ -104,47 +110,77 @@ export default function Contact() {
               <Honeypot />
               <input type="hidden" name="_subject" value="New enquiry from the HIKMAIN Labs website" />
 
-              <TextField label="Name" name="name" required autoComplete="name" error={errors.name} />
-              <fieldset className="space-y-6">
-                <legend className="text-sm text-black/70">Please provide at least one way for us to reach you.</legend>
-                <TextField label="Email" name="email" type="email" autoComplete="email" error={errors.email} />
-                <TextField
-                  label="WhatsApp number"
-                  name="whatsapp"
-                  type="tel"
-                  autoComplete="tel"
-                  placeholder="Include country code, e.g. +44 7700 900123"
-                  error={errors.whatsapp}
-                />
-              </fieldset>
               <SelectField
                 label="Service of interest"
                 name="service"
                 required
                 options={services}
                 placeholder="Choose a service"
-                defaultValue={matchService(params.get('service'))}
+                value={service}
+                onChange={(e) => setService(e.target.value)}
                 error={errors.service}
               />
-              <SelectField label="Preferred contact method" name="preferred_method" options={methods} placeholder="No preference" />
-              <TextArea label="Short message" name="message" rows={4} maxLength={2000} />
 
-              <Checkbox name="consent" error={errors.consent}>
-                I agree to HIKMAIN LABS LTD using my details to reply to this enquiry, as described in the{' '}
-                <Link to="/privacy" className="text-action underline">Privacy Notice</Link>.
-              </Checkbox>
+              <div aria-live="polite">
+                {isSchool && (
+                  <div className="rounded-xl border-2 border-accent bg-surface p-5">
+                    <h3 className="text-lg font-semibold">Contact Elevate Tuition directly</h3>
+                    <p className="mt-2 leading-relaxed">
+                      For school and pre-university tutoring, please contact Elevate Tuition directly. They
+                      are an independent tutoring partner with their own pricing, terms and privacy policy.
+                    </p>
+                    <Button
+                      className="mt-4 w-full sm:w-auto"
+                      href={elevateWhatsapp || site.elevate.url}
+                    >
+                      {elevateWhatsapp ? 'Message Elevate Tuition on WhatsApp' : 'Visit Elevate Tuition'}
+                    </Button>
+                  </div>
+                )}
+              </div>
 
-              <Captcha />
+              {/* Hidden (not unmounted) for school enquiries, so typed answers survive switching back */}
+              <div className={isSchool ? 'hidden' : 'space-y-6'}>
+                <TextField label="Name" name="name" required autoComplete="name" error={errors.name} />
+                <fieldset className="space-y-6">
+                  <legend className="text-sm text-black/70">Please provide at least one way for us to reach you.</legend>
+                  <TextField label="Email" name="email" type="email" autoComplete="email" error={errors.email} />
+                  <TextField
+                    label="WhatsApp number"
+                    name="whatsapp"
+                    type="tel"
+                    autoComplete="tel"
+                    placeholder="Include country code, e.g. +44 7700 900123"
+                    error={errors.whatsapp}
+                  />
+                </fieldset>
+                <SelectField label="Preferred contact method" name="preferred_method" options={methods} placeholder="No preference" />
+                <TextArea label="Short message" name="message" rows={4} maxLength={2000} />
 
-              {formError && (
-                <p role="alert" className="rounded-lg bg-red-50 p-3 text-sm font-medium text-red-800">
-                  {formError}
+                <Checkbox name="consent" error={errors.consent}>
+                  I agree to HIKMAIN LABS LTD using my details to reply to this enquiry, as described in the{' '}
+                  <Link to="/privacy" className="text-action underline">Privacy Notice</Link>.
+                </Checkbox>
+
+                <p className="rounded-lg bg-surface p-3 text-sm leading-relaxed text-black/75">
+                  We use the details you give here only to reply to your enquiry. Please don&rsquo;t include
+                  sensitive or confidential information in your message. See our{' '}
+                  <Link to="/privacy" className="text-action underline">Privacy Notice</Link> for how we handle
+                  your data and your rights.
                 </p>
-              )}
 
-              <Button type="submit" disabled={status === 'sending'}>
-                {status === 'sending' ? 'Sending…' : 'Send message'}
-              </Button>
+                <Captcha />
+
+                {formError && (
+                  <p role="alert" className="rounded-lg bg-red-50 p-3 text-sm font-medium text-red-800">
+                    {formError}
+                  </p>
+                )}
+
+                <Button type="submit" disabled={status === 'sending'}>
+                  {status === 'sending' ? 'Sending…' : 'Send message'}
+                </Button>
+              </div>
             </form>
           )}
         </div>
