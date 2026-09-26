@@ -6,7 +6,7 @@ import Button from '../components/Button'
 import { site } from '../config/site'
 import useFormSubmit, { isEmail } from '../hooks/useFormSubmit'
 import { Checkbox, Fieldset, FileField, TextArea, TextField } from '../components/form/Fields'
-import { Captcha, Honeypot } from '../components/form/SpamProtection'
+import { Honeypot } from '../components/form/SpamProtection'
 
 const infoPoints = [
   'Assignments are offered on a project-by-project basis, depending on client needs.',
@@ -172,8 +172,6 @@ export default function JoinNetwork() {
                 <Link to="/privacy" className="text-action underline">Privacy Notice</Link> for how we handle your
                 data and your rights.
               </p>
-
-              <Captcha />
 
               {formError && (
                 <p role="alert" className="rounded-lg bg-red-50 p-3 text-sm font-medium text-red-800">

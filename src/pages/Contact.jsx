@@ -8,7 +8,7 @@ import Button from '../components/Button'
 import { mailtoUrl, meetUrl, site, whatsappUrl } from '../config/site'
 import useFormSubmit, { isEmail } from '../hooks/useFormSubmit'
 import { Checkbox, SelectField, TextArea, TextField } from '../components/form/Fields'
-import { Captcha, Honeypot } from '../components/form/SpamProtection'
+import { Honeypot } from '../components/form/SpamProtection'
 
 const UNIVERSITY = 'University Tutoring'
 const SCHOOL = 'School, GCSE or A Level Tutoring'
@@ -168,8 +168,6 @@ export default function Contact() {
                   <Link to="/privacy" className="text-action underline">Privacy Notice</Link> for how we handle
                   your data and your rights.
                 </p>
-
-                <Captcha />
 
                 {formError && (
                   <p role="alert" className="rounded-lg bg-red-50 p-3 text-sm font-medium text-red-800">

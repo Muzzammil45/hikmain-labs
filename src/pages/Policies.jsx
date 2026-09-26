@@ -63,7 +63,7 @@ const policies = {
     intro: "This policy explains how HIKMAIN's website uses cookies and similar storage/access technologies.",
     sections: [
       sec('Types of technologies', [], [
-        'Strictly necessary technologies: required for core website operation, security, network delivery or remembering a visitor’s cookie preference. These are limited to what is genuinely necessary. Our enquiry and application forms use Cloudflare Turnstile, a security check that helps us block automated spam.',
+        'Strictly necessary technologies: required for core website operation, security, network delivery or remembering a visitor’s cookie preference. These are limited to what is genuinely necessary.',
         'Analytics technologies: HIKMAIN plans to use Google Analytics and Vercel Analytics to understand website traffic and how visitors use the site so that performance and content can be improved.',
         'Marketing technologies: none are currently used.',
       ]),
@@ -186,7 +186,7 @@ const policies = {
         'Test important pages and forms across common screen sizes and interaction methods.',
       ]),
       sec('Known limitations', [
-        "No specific accessibility limitations have yet been formally documented. Third-party embedded services, such as the Cloudflare Turnstile security check on our forms, may have accessibility characteristics outside HIKMAIN's direct control.",
+        "No specific accessibility limitations have yet been formally documented. Third-party embedded services may have accessibility characteristics outside HIKMAIN's direct control.",
       ]),
       sec('Feedback', [
         `If a visitor experiences an accessibility problem or needs information in a different format, they can contact HIKMAIN at ${contact.email} or ${contact.phone}. Please include the page or feature involved and a description of the problem where possible.`,

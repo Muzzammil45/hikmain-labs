@@ -33,9 +33,6 @@ export const site = {
   forms: {
     contactEndpoint: 'https://formspree.io/f/xdekwbrj',
     applicationEndpoint: 'https://formspree.io/f/maenpvrz',
-    // Cloudflare Turnstile site key. The env var lets local development use
-    // Cloudflare's test key, because the live key only works on the approved domain.
-    captchaSiteKey: import.meta.env.VITE_TURNSTILE_SITE_KEY || '0x4AAAAAFE+tIZmIuqnQMw1O',
   },
 
   // Elevate Tuition: independent partner for school, GCSE and A Level tutoring.
