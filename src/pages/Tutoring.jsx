@@ -19,11 +19,11 @@ export default function Tutoring() {
     <>
       <Seo
         title="Tutoring"
-        description="Personalised university tutoring from HIKMAIN Labs, with school, GCSE and A Level support through our independent partner, Elevate Tuition."
+        description={`Personalised university tutoring from ${site.name}, with school, GCSE and A Level support through our independent partner, ${site.elevate.name}.`}
       />
       <PageHero
         title="Personalised tutoring at every stage"
-        intro="HIKMAIN Labs provides personalised tutoring for university students. For school and pre-university support from KS1 to A Level, we work with Elevate Tuition, an independent tutoring partner."
+        intro={`${site.name} provides personalised tutoring for university students. For school and pre-university support from KS1 to A Level, we work with ${site.elevate.name}, an independent tutoring partner.`}
       />
 
       <Section>
@@ -39,13 +39,13 @@ export default function Tutoring() {
           </li>
           <li className="flex flex-col">
             <Card title="School, GCSE & A Level Tutoring" icon={<Icon name="group" />} className="flex-1">
-              <p>Expert pre-university support from KS1 to A Level, delivered by Elevate Tuition</p>
+              <p>Expert pre-university support from KS1 to A Level, delivered by {site.elevate.name}</p>
               <Button href={site.elevate.url} variant="secondary" className="mt-6 w-full sm:w-auto">
-                Visit Elevate Tuition
+                Visit {site.elevate.name}
               </Button>
             </Card>
             <p className="mt-3 text-sm leading-relaxed text-black/70">
-              You will continue your enquiry directly with Elevate Tuition, which operates independently
+              You will continue your enquiry directly with {site.elevate.name}, which operates independently
               and has its own pricing, terms and privacy policy.
             </p>
           </li>
@@ -91,9 +91,7 @@ export default function Tutoring() {
             <div>
               <h2 className="text-2xl font-bold sm:text-3xl">Academic integrity</h2>
               <p className="mt-4 text-lg font-medium leading-relaxed">
-                HIKMAIN Labs supports genuine learning. Tutors explain concepts, give feedback and help
-                students practice, but do not sit examinations, impersonate students or complete assessed
-                work for submission as the student&rsquo;s own.
+                {site.academicIntegrityStatement}
               </p>
               <p className="mt-4">
                 Read our full <Link to="/academic-integrity">Academic Integrity Policy</Link>.

@@ -18,18 +18,21 @@ const infoPoints = [
 ]
 
 const declarations = [
-  ['declare_status', 'I understand that I would be an independent contractor or freelancer, not an employee, worker or agent of HIKMAIN LABS LTD.'],
+  ['declare_status', `I understand that I would be an independent contractor or freelancer, not an employee, worker or agent of ${site.legalName}.`],
   ['declare_no_guarantee', 'I understand that joining the network does not guarantee any minimum amount, duration or frequency of work.'],
   ['declare_accuracy', 'I confirm that the information I have provided is accurate and complete to the best of my knowledge.'],
   ['declare_taxes', 'I understand that I am responsible for my own taxes, insurance and any registrations required.'],
-  ['declare_gdpr', 'I consent to HIKMAIN LABS LTD processing my personal data to assess my application, as described in the Privacy Notice.'],
+  // Rendered with a Privacy Notice link in the form below
+  ['declare_gdpr'],
 ]
 
-const MAX_FILE_BYTES = 5 * 1024 * 1024
+const MAX_FILE_MB = 5
+const MAX_FILE_BYTES = MAX_FILE_MB * 1024 * 1024
 const ALLOWED_FILE = /\.(pdf|docx?|rtf|txt)$/i
-// Filenames that suggest sensitive personal documents. Client-side guard only; the
-// on-page warning and the receiving inbox's own policy are the real protection.
-const SENSITIVE_FILE = /passport|driv(er|ing)|licen[cs]e|national.?id|\bnin\b|ssn|social.?security|bank|statement|payslip|visa|birth.?cert|\bid\b|identity/i
+// Filenames that clearly suggest sensitive personal documents (e.g. "passport-scan.pdf").
+// Deliberately narrow so ordinary CV names such as "personal-statement.pdf" still pass.
+// Client-side guard only; the on-page warning is the main protection.
+const SENSITIVE_FILE = /passport|driv(er|ing)[\s_-]*licen[cs]e|national[\s_-]*(id|insurance)|\bnin\b|\bssn\b|social[\s_-]*security|bank[\s_-]*statement|payslip|\bvisa\b|birth[\s_-]*cert|\bid[\s_-]*(card|scan|document)|identity[\s_-]*(card|document)/i
 
 const required = {
   full_name: 'Please enter your full name.',
@@ -55,7 +58,7 @@ function validate(data) {
   const file = data.get('supporting_file')
   if (file && file.size > 0) {
     if (!ALLOWED_FILE.test(file.name)) errors.supporting_file = 'Please upload a PDF, Word document, RTF or text file.'
-    else if (file.size > MAX_FILE_BYTES) errors.supporting_file = 'Your file is larger than 5 MB. Please upload a smaller version.'
+    else if (file.size > MAX_FILE_BYTES) errors.supporting_file = `Your file is larger than ${MAX_FILE_MB} MB. Please upload a smaller version.`
     else if (SENSITIVE_FILE.test(file.name)) errors.supporting_file = 'This looks like a sensitive personal document. Please upload only a CV or portfolio.'
   }
   return errors
@@ -134,7 +137,7 @@ export default function JoinNetwork() {
                 name="supporting_file"
                 accept=".pdf,.doc,.docx,.rtf,.txt"
                 error={errors.supporting_file}
-                hint="PDF or Word, up to 5 MB. Please do not upload passports, ID documents, bank details or any other sensitive personal documents."
+                hint={`PDF or Word, up to ${MAX_FILE_MB} MB. Please do not upload passports, ID documents, bank details or any other sensitive personal documents.`}
               />
 
               <Checkbox name="equipment" error={errors.equipment}>
@@ -155,7 +158,7 @@ export default function JoinNetwork() {
                   <Checkbox key={name} name={name} error={errors[name]}>
                     {name === 'declare_gdpr' ? (
                       <>
-                        I consent to HIKMAIN LABS LTD processing my personal data to assess my application, as
+                        I consent to {site.legalName} processing my personal data to assess my application, as
                         described in the <Link to="/privacy" className="text-action underline">Privacy Notice</Link>.
                       </>
                     ) : (

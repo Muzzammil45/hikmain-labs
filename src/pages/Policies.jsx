@@ -248,9 +248,7 @@ export default function Policies({ slug }) {
           <article className="max-w-3xl lg:col-span-3">
             {policy.statement && (
               <p className="rounded-xl border-2 border-accent p-5 text-lg font-medium leading-relaxed">
-                HIKMAIN Labs supports genuine learning. Tutors explain concepts, give feedback and help
-                students practice, but do not sit examinations, impersonate students or complete assessed
-                work for submission as the student&rsquo;s own.
+                {site.academicIntegrityStatement}
               </p>
             )}
             {policy.intro && (

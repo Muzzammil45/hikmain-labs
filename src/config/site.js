@@ -14,6 +14,10 @@ export const site = {
   domain: '[DOMAIN TO BE UPDATED]', // e.g. https://www.hikmainlabs.co.uk
   tagline: 'Skilled support built around your project',
 
+  // Shown on the Tutoring page and at the top of the Academic Integrity Policy.
+  academicIntegrityStatement:
+    'HIKMAIN Labs supports genuine learning. Tutors explain concepts, give feedback and help students practice, but do not sit examinations, impersonate students or complete assessed work for submission as the student’s own.',
+
   company: {
     number: '17454287',
     registeredOffice: '272 Wingrove Avenue, Newcastle Upon Tyne, NE4 9AA, United Kingdom',

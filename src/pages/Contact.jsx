@@ -124,16 +124,16 @@ export default function Contact() {
               <div aria-live="polite">
                 {isSchool && (
                   <div className="rounded-xl border-2 border-accent bg-surface p-5">
-                    <h3 className="text-lg font-semibold">Contact Elevate Tuition directly</h3>
+                    <h3 className="text-lg font-semibold">Contact {site.elevate.name} directly</h3>
                     <p className="mt-2 leading-relaxed">
-                      For school and pre-university tutoring, please contact Elevate Tuition directly. They
+                      For school and pre-university tutoring, please contact {site.elevate.name} directly. They
                       are an independent tutoring partner with their own pricing, terms and privacy policy.
                     </p>
                     <Button
                       className="mt-4 w-full sm:w-auto"
                       href={elevateWhatsapp || site.elevate.url}
                     >
-                      {elevateWhatsapp ? 'Message Elevate Tuition on WhatsApp' : 'Visit Elevate Tuition'}
+                      {elevateWhatsapp ? `Message ${site.elevate.name} on WhatsApp` : `Visit ${site.elevate.name}`}
                     </Button>
                   </div>
                 )}
@@ -158,7 +158,7 @@ export default function Contact() {
                 <TextArea label="Short message" name="message" rows={4} maxLength={2000} />
 
                 <Checkbox name="consent" error={errors.consent}>
-                  I agree to HIKMAIN LABS LTD using my details to reply to this enquiry, as described in the{' '}
+                  I agree to {site.legalName} using my details to reply to this enquiry, as described in the{' '}
                   <Link to="/privacy" className="text-action underline">Privacy Notice</Link>.
                 </Checkbox>
 

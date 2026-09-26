@@ -5,6 +5,7 @@ import Card, { Icon } from '../components/Card'
 import Pattern from '../components/Pattern'
 import Section, { SectionHeading } from '../components/Section'
 import ContactOptions from '../components/ContactOptions'
+import { site } from '../config/site'
 
 const audiences = [
   { icon: 'user', title: 'Individuals', text: 'Personal projects, research or learning goals that need a capable extra pair of hands.' },
@@ -18,7 +19,7 @@ const services = [
   { icon: 'data', title: 'AI and data project support', text: 'Human evaluation, feedback and data annotation to help AI and data projects stay accurate.', to: '/project-support' },
   { icon: 'task', title: 'Digital project assistance', text: 'Online research, information gathering and organisation, delivered clearly and on time.', to: '/project-support' },
   { icon: 'repeat', title: 'Ongoing weekly support', text: 'Recurring assignments with tracking and quality control for work that continues.', to: '/project-support' },
-  { icon: 'learn', title: 'Personalised tutoring', text: 'University-level tutoring from HIKMAIN Labs, with school and sixth-form support available through our partner, Elevate Tuition.', to: '/tutoring' },
+  { icon: 'learn', title: 'Personalised tutoring', text: `University-level tutoring from ${site.name}, with school and sixth-form support available through our partner, ${site.elevate.name}.`, to: '/tutoring' },
 ]
 
 const reasons = [
