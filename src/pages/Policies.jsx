@@ -21,7 +21,7 @@ const policies = {
     description: `How ${legalName} handles personal data when you visit our website, contact us or use our services.`,
     sections: [
       sec('Who we are', [
-        `${legalName} ("HIKMAIN", "we", "us" or "our") is a company registered in England and Wales under company number ${company.number}. Our registered office is ${company.registeredOffice}. This notice explains how we handle personal data when people visit our website, contact us, enquire about our services, become clients, receive tutoring support, or otherwise interact with us.`,
+        `${legalName} is a company registered in England and Wales under company number ${company.number}. Our registered office is ${company.registeredOffice}. This notice explains how we handle personal data when people visit our website, contact us, enquire about our services, become clients, receive tutoring support, or otherwise interact with us.`,
       ]),
       sec('Personal data we may collect', [], [
         'Identity and contact information, such as name, email address, telephone/WhatsApp number and any organisation or institution details voluntarily supplied.',
