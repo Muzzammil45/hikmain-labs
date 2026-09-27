@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { site } from '../config/site'
 
 const MIN_FILL_MS = 3000 // humans take longer than this to complete a form
@@ -13,7 +13,12 @@ export default function useFormSubmit({ endpoint, validate }) {
   const [status, setStatus] = useState('idle')
   const [errors, setErrors] = useState({})
   const [formError, setFormError] = useState('')
-  const startedAt = useRef(Date.now())
+  const startedAt = useRef(0)
+
+  // Record when the form appeared, for the minimum-fill-time spam check
+  useEffect(() => {
+    startedAt.current = Date.now()
+  }, [])
 
   const onSubmit = async (event) => {
     event.preventDefault()

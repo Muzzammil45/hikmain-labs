@@ -4,11 +4,11 @@ import { site } from '../config/site'
 import Logo from './Logo'
 
 export default function Header() {
-  const [open, setOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
+  // The mobile menu is "open" only for the page it was opened on, so it closes itself on navigation
   const { pathname } = useLocation()
-
-  useEffect(() => setOpen(false), [pathname])
+  const [openPath, setOpenPath] = useState(null)
+  const open = openPath === pathname
+  const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8)
@@ -51,7 +51,7 @@ export default function Header() {
           aria-expanded={open}
           aria-controls="mobile-nav"
           aria-label={open ? 'Close menu' : 'Open menu'}
-          onClick={() => setOpen((o) => !o)}
+          onClick={() => setOpenPath(open ? null : pathname)}
         >
           <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
             {open ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}

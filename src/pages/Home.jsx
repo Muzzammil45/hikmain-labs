@@ -33,9 +33,7 @@ const reasons = [
 export default function Home() {
   return (
     <>
-      <Seo
-        description="HIKMAIN Labs provides flexible AI project support, digital assistance and personalised tutoring for individuals, independent professionals and growing teams."
-      />
+      <Seo />
 
       {/* Hero */}
       <div className="relative overflow-hidden bg-primary text-white">

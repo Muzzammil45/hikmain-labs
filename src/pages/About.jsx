@@ -3,6 +3,9 @@ import PageHero from '../components/PageHero'
 import Section, { SectionHeading } from '../components/Section'
 import Card, { Icon } from '../components/Card'
 import Button from '../components/Button'
+import { site } from '../config/site'
+
+const companyStatement = `${site.legalName} is a UK-registered company providing flexible project support and personalised learning services through a managed network of independent professionals.`
 
 const values = [
   ['Reliability', 'check', 'We do what we say we will, when we say we will.'],
@@ -18,18 +21,15 @@ export default function About() {
     <>
       <Seo
         title="About"
-        description="HIKMAIN LABS LTD is a UK-registered company providing flexible project support and personalised learning services through a managed network of independent professionals."
+        description={companyStatement}
       />
-      <PageHero title="About HIKMAIN Labs" />
+      <PageHero title={`About ${site.name}`} />
 
       <Section>
         <div className="grid gap-10 lg:grid-cols-2">
           <div>
             <h2 className="text-2xl font-bold sm:text-3xl">Who we are</h2>
-            <p className="mt-4 text-lg leading-relaxed text-black/80">
-              HIKMAIN LABS LTD is a UK-registered company providing flexible project support and
-              personalised learning services through a managed network of independent professionals.
-            </p>
+            <p className="mt-4 text-lg leading-relaxed text-black/80">{companyStatement}</p>
           </div>
           <div className="rounded-2xl bg-surface p-6 sm:p-8">
             <h2 className="text-2xl font-bold sm:text-3xl">Our mission</h2>

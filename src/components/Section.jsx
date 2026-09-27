@@ -6,7 +6,8 @@ const tones = {
 
 export default function Section({ tone = 'white', className = '', children, id }) {
   return (
-    <section id={id} className={`${tones[tone]} py-14 sm:py-20 ${className}`}>
+    // scroll-mt keeps anchor targets clear of the sticky header
+    <section id={id} className={`${tones[tone]} scroll-mt-16 py-14 sm:py-20 ${className}`}>
       <div className="container-page">{children}</div>
     </section>
   )
@@ -17,7 +18,7 @@ export function SectionHeading({ eyebrow, title, intro, tone = 'white', classNam
   return (
     <div className={`max-w-3xl ${className}`}>
       {eyebrow && (
-        <p className={`text-sm font-semibold uppercase tracking-wider ${dark ? 'text-teal-300' : 'text-accent'}`}>
+        <p className={`text-sm font-semibold uppercase tracking-wider ${dark ? 'text-teal-300' : 'text-accent-dark'}`}>
           {eyebrow}
         </p>
       )}

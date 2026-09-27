@@ -12,7 +12,8 @@ export default function Seo({ title, description }) {
       meta.name = 'description'
       document.head.appendChild(meta)
     }
-    if (description) meta.content = description
+    // Fall back to the site-wide description so a page without one never keeps the previous page's text
+    meta.content = description || site.description
   }, [title, description])
 
   return null

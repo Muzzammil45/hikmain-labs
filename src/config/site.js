@@ -13,6 +13,9 @@ export const site = {
   legalName: 'HIKMAIN LABS LTD',
   domain: '[DOMAIN TO BE UPDATED]', // e.g. https://www.hikmainlabs.co.uk
   tagline: 'Skilled support built around your project',
+  // Default meta description (also used for the Home page)
+  description:
+    'HIKMAIN Labs provides flexible AI project support, digital assistance and personalised tutoring for individuals, independent professionals and growing teams.',
 
   // Shown on the Tutoring page.
   academicIntegrityStatement:
