@@ -1,5 +1,6 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
 import Seo from '../components/Seo'
 import PageHero from '../components/PageHero'
 import Section from '../components/Section'
@@ -8,9 +9,10 @@ import { site } from '../config/site'
 import useFormSubmit, { isEmail } from '../hooks/useFormSubmit'
 import { SelectField, TextField } from '../components/form/Fields'
 import { Honeypot } from '../components/form/SpamProtection'
+import { fadeUp } from '../lib/motion'
 
 const grades = ['KS1', 'KS2', 'KS3', 'GCSE', 'A Level']
-const REDIRECT_DELAY_MS = 2000 // long enough to read the confirmation message
+const REDIRECT_DELAY_MS = 2500 // gives the visitor time to read the confirmation before the handoff
 
 function validate(data) {
   const errors = {}
@@ -25,15 +27,26 @@ function validate(data) {
 }
 
 export default function ElevateReferral() {
+  const [popupBlocked, setPopupBlocked] = useState(false)
   const { status, errors, formError, onSubmit } = useFormSubmit({
     endpoint: site.forms.elevateReferralEndpoint,
     validate,
   })
 
-  // Once the details are recorded, pass the visitor on to Elevate Tuition
+  // Once Formspree has confirmed the referral was recorded, hand the visitor on to Elevate
+  // Tuition after a short pause so they have time to read the confirmation first.
+  //
+  // Note: because window.open() here runs inside a setTimeout — not synchronously within the
+  // click that submitted the form — most browsers no longer treat it as part of that user
+  // gesture, so a popup blocker is more likely to block it than if it were opened immediately.
+  // The manual "open it yourself" link below is the fallback for exactly that case.
   useEffect(() => {
     if (status !== 'success') return undefined
-    const timer = setTimeout(() => window.location.assign(site.elevate.referralUrl), REDIRECT_DELAY_MS)
+    const timer = setTimeout(() => {
+      const opened = window.open(site.elevate.referralUrl, '_blank')
+      if (opened) opened.opener = null // equivalent to rel="noopener" for a window.open() call
+      setPopupBlocked(!opened)
+    }, REDIRECT_DELAY_MS)
     return () => clearTimeout(timer)
   }, [status])
 
@@ -49,13 +62,28 @@ export default function ElevateReferral() {
       />
 
       <Section tone="surface">
-        <div className="mx-auto max-w-2xl">
+        <motion.div variants={fadeUp} className="mx-auto max-w-2xl">
           {status === 'success' ? (
             <div role="status" className="rounded-xl border-2 border-accent bg-white p-6">
-              <h2 className="text-xl font-semibold">Great! Redirecting you to {site.elevate.name}...</h2>
+              <h2 className="text-xl font-semibold">Great! You&rsquo;re registered with {site.elevate.name}.</h2>
               <p className="mt-2 leading-relaxed">
-                If nothing happens, <a href={site.elevate.referralUrl}>continue to {site.elevate.name}</a>.
+                Opening {site.elevate.name} in a new tab in a few seconds&hellip; or{' '}
+                <a href={site.elevate.referralUrl} target="_blank" rel="noopener noreferrer">
+                  continue now
+                </a>
+                .
               </p>
+
+              {popupBlocked && (
+                <div className="mt-3 rounded-lg bg-surface p-3">
+                  <p className="text-sm leading-relaxed">
+                    Your browser blocked the new tab. Please allow pop-ups for this site, or continue manually:
+                  </p>
+                  <Button href={site.elevate.referralUrl} className="mt-3 w-full sm:w-auto">
+                    Open {site.elevate.name}
+                  </Button>
+                </div>
+              )}
             </div>
           ) : (
             <form
@@ -93,15 +121,9 @@ export default function ElevateReferral() {
               </p>
 
               {formError && (
-                <div role="alert" className="rounded-lg bg-red-50 p-3 text-sm font-medium text-red-800">
-                  <p>{formError}</p>
-                  {status === 'error' && (
-                    <p className="mt-2">
-                      You can also{' '}
-                      <a href={site.elevate.referralUrl} className="underline">continue to {site.elevate.name}</a> directly.
-                    </p>
-                  )}
-                </div>
+                <p role="alert" className="rounded-lg bg-red-50 p-3 text-sm font-medium text-red-800">
+                  {formError}
+                </p>
               )}
 
               <Button type="submit" disabled={status === 'sending'} className="w-full sm:w-auto">
@@ -113,7 +135,7 @@ export default function ElevateReferral() {
           <p className="mt-6 text-sm">
             <Link to="/tutoring">&larr; Back to tutoring</Link>
           </p>
-        </div>
+        </motion.div>
       </Section>
     </>
   )

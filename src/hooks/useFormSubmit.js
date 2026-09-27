@@ -6,10 +6,16 @@ const MIN_FILL_MS = 3000 // humans take longer than this to complete a form
 /**
  * Handles validation, spam checks and POSTing to a form endpoint.
  *   validate(formData) -> { fieldName: 'message' } (empty object when valid)
+ *   onBeforeSend() -> called synchronously once validation passes, just before the
+ *     network request starts. Use this (not a `status === 'success'` effect) for anything
+ *     that must count as part of the user's original click, such as window.open() — browsers
+ *     only exempt popups from their blocker when opened synchronously within the click's own
+ *     call stack, before any `await`, so opening one later (e.g. after the request resolves,
+ *     or from a timer) gets blocked.
  * Returns { status, errors, formError, onSubmit }.
  *   status: 'idle' | 'sending' | 'success' | 'error'
  */
-export default function useFormSubmit({ endpoint, validate }) {
+export default function useFormSubmit({ endpoint, validate, onBeforeSend }) {
   const [status, setStatus] = useState('idle')
   const [errors, setErrors] = useState({})
   const [formError, setFormError] = useState('')
@@ -51,6 +57,8 @@ export default function useFormSubmit({ endpoint, validate }) {
       )
       return
     }
+
+    onBeforeSend?.()
 
     setStatus('sending')
     try {

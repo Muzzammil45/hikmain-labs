@@ -3,10 +3,10 @@ import { createPortal } from 'react-dom'
 import { Icon } from './Card'
 import { gmailUrl, mailtoUrl, outlookUrl, site } from '../config/site'
 
-const emailOptions = (subject) => [
-  { key: 'gmail', label: 'Open Gmail', href: gmailUrl(subject) },
-  { key: 'outlook', label: 'Open Outlook', href: outlookUrl(subject) },
-  { key: 'app', label: 'Open Mail App', href: mailtoUrl(subject) },
+const emailOptions = (subject, body) => [
+  { key: 'gmail', label: 'Open Gmail', href: gmailUrl(subject, body) },
+  { key: 'outlook', label: 'Open Outlook', href: outlookUrl(subject, body) },
+  { key: 'app', label: 'Open Mail App', href: mailtoUrl(subject, body) },
 ]
 
 /** Copies text to the clipboard, falling back to a hidden textarea on older browsers. */
@@ -38,7 +38,7 @@ async function copyToClipboard(text) {
  * browsers when no mail client is configured, so this gives people a working option.
  * Opened via the EmailLink component or the useEmailModal hook, not used on its own.
  */
-export default function EmailModal({ open, onClose, subject, triggerRef }) {
+export default function EmailModal({ open, onClose, subject, body, triggerRef }) {
   const dialogRef = useRef(null)
   const [copyState, setCopyState] = useState('idle') // 'idle' | 'copied' | 'failed'
 
@@ -136,7 +136,7 @@ export default function EmailModal({ open, onClose, subject, triggerRef }) {
         <p className="mt-4 break-all rounded-lg bg-surface px-3 py-2 text-sm font-medium">{site.contact.email}</p>
 
         <div className="mt-5 space-y-2">
-          {emailOptions(subject).map((option) => (
+          {emailOptions(subject, body).map((option) => (
             <a
               key={option.key}
               href={option.href}

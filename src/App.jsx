@@ -1,8 +1,10 @@
 ﻿import { Link, Route, Routes } from 'react-router-dom'
+import { motion } from 'framer-motion'
 import Layout from './components/Layout'
 import Seo from './components/Seo'
 import Section from './components/Section'
 import Button from './components/Button'
+import { fadeUp } from './lib/motion'
 import Home from './pages/Home'
 import ProjectSupport from './pages/ProjectSupport'
 import Tutoring from './pages/Tutoring'
@@ -19,11 +21,13 @@ function NotFound() {
   return (
     <Section>
       <Seo title="Page not found" />
-      <h1 className="text-3xl font-bold">Page not found</h1>
-      <p className="mt-4">
-        Sorry, we couldn&rsquo;t find that page. Try the <Link to="/">home page</Link>.
-      </p>
-      <Button to="/" className="mt-6">Back to home</Button>
+      <motion.div variants={fadeUp}>
+        <h1 className="text-3xl font-bold">Page not found</h1>
+        <p className="mt-4">
+          Sorry, we couldn&rsquo;t find that page. Try the <Link to="/">home page</Link>.
+        </p>
+        <Button to="/" className="mt-6">Back to home</Button>
+      </motion.div>
     </Section>
   )
 }

@@ -1,8 +1,10 @@
+import { motion } from 'framer-motion'
 import Seo from '../components/Seo'
 import PageHero from '../components/PageHero'
 import Section, { SectionHeading } from '../components/Section'
 import ContactOptions from '../components/ContactOptions'
 import Card, { Icon } from '../components/Card'
+import { fadeUp } from '../lib/motion'
 
 const steps = [
   ['Initial enquiry', 'Get in touch by WhatsApp, Google Meet or email, whichever is easiest for you.'],
@@ -33,7 +35,7 @@ export default function HowItWorks() {
       />
 
       <Section>
-        <ol className="relative mx-auto max-w-3xl space-y-8">
+        <motion.ol variants={fadeUp} className="relative mx-auto max-w-3xl space-y-8">
           <span aria-hidden="true" className="absolute left-5 top-2 hidden h-[calc(100%-1rem)] w-px bg-accent/30 sm:block" />
           {steps.map(([title, text], i) => (
             <li key={title} className="relative flex gap-5">
@@ -53,7 +55,7 @@ export default function HowItWorks() {
               </div>
             </li>
           ))}
-        </ol>
+        </motion.ol>
       </Section>
 
       <Section tone="surface">

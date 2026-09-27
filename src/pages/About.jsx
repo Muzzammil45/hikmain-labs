@@ -1,9 +1,11 @@
+import { motion } from 'framer-motion'
 import Seo from '../components/Seo'
 import PageHero from '../components/PageHero'
 import Section, { SectionHeading } from '../components/Section'
 import Card, { Icon } from '../components/Card'
 import Button from '../components/Button'
 import { site } from '../config/site'
+import { fadeUp } from '../lib/motion'
 
 const companyStatement = `${site.legalName} is a UK-registered company providing flexible project support and personalised learning services through a managed network of independent professionals.`
 
@@ -26,7 +28,7 @@ export default function About() {
       <PageHero title={`About ${site.name}`} />
 
       <Section>
-        <div className="grid gap-10 lg:grid-cols-2">
+        <motion.div variants={fadeUp} className="grid gap-10 lg:grid-cols-2">
           <div>
             <h2 className="text-2xl font-bold sm:text-3xl">Who we are</h2>
             <p className="mt-4 text-lg leading-relaxed text-black/80">{companyStatement}</p>
@@ -38,7 +40,7 @@ export default function About() {
               communication, flexible arrangements and carefully managed delivery.
             </p>
           </div>
-        </div>
+        </motion.div>
       </Section>
 
       <Section tone="surface">
@@ -55,7 +57,7 @@ export default function About() {
       </Section>
 
       <Section tone="dark">
-        <div className="max-w-3xl">
+        <motion.div variants={fadeUp} className="max-w-3xl">
           <h2 className="text-3xl font-bold !text-white">Work with us</h2>
           <p className="mt-4 text-lg text-white/90">
             Looking for support, or a skilled professional interested in joining our network?
@@ -64,7 +66,7 @@ export default function About() {
             <Button to="/contact" variant="light">Tell Us What You Need</Button>
             <Button to="/join" variant="outlineLight">Join Our Network</Button>
           </div>
-        </div>
+        </motion.div>
       </Section>
     </>
   )

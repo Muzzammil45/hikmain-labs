@@ -16,5 +16,9 @@ export default function useEmailModal() {
     setOpen(true)
   }
 
-  return { open, onClick, close: () => setOpen(false), triggerRef }
+  // For opening the modal from code rather than a real click (e.g. a button inside another
+  // modal that hands off to this one), bypassing the click-event checks above.
+  const openModal = () => setOpen(true)
+
+  return { open, onClick, openModal, close: () => setOpen(false), triggerRef }
 }

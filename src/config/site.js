@@ -85,9 +85,9 @@ export const site = {
     {
       title: 'Services',
       links: [
-        { label: 'Project Support', to: '/project-support' },
-        { label: 'AI and data support', to: '/project-support#ai' },
-        { label: 'Research support', to: '/project-support#research' },
+        { label: 'AI & Project Support', to: '/project-support' },
+        { label: 'AI and data support', to: '/project-support#ai-data' },
+        { label: 'Research support', to: '/project-support#research-digital' },
         { label: 'Ongoing remote support', to: '/project-support#ongoing' },
         { label: 'Tutoring', to: '/tutoring' },
       ],
@@ -105,7 +105,7 @@ export const site = {
 
   nav: [
     { label: 'Home', to: '/' },
-    { label: 'Project Support', to: '/project-support' },
+    { label: 'AI & Project Support', to: '/project-support' },
     { label: 'Tutoring', to: '/tutoring' },
     { label: 'How It Works', to: '/how-it-works' },
     { label: 'About', to: '/about' },
@@ -120,16 +120,17 @@ export const whatsappUrl = (message = 'Hello HIKMAIN Labs, I would like to discu
     : null
 
 const DEFAULT_EMAIL_SUBJECT = 'Enquiry from the HIKMAIN Labs website'
+const bodyParam = (name, body) => (body ? `&${name}=${encodeURIComponent(body)}` : '')
 
-export const mailtoUrl = (subject = DEFAULT_EMAIL_SUBJECT) =>
-  `mailto:${site.contact.email}?subject=${encodeURIComponent(subject)}`
+export const mailtoUrl = (subject = DEFAULT_EMAIL_SUBJECT, body) =>
+  `mailto:${site.contact.email}?subject=${encodeURIComponent(subject)}${bodyParam('body', body)}`
 
 // Compose-in-browser links, offered as alternatives to mailto: from the email options modal
 // (a plain mailto: link silently does nothing if the visitor has no desktop mail client set up).
-export const gmailUrl = (subject = DEFAULT_EMAIL_SUBJECT) =>
-  `https://mail.google.com/mail/?view=cm&to=${site.contact.email}&su=${encodeURIComponent(subject)}`
+export const gmailUrl = (subject = DEFAULT_EMAIL_SUBJECT, body) =>
+  `https://mail.google.com/mail/?view=cm&to=${site.contact.email}&su=${encodeURIComponent(subject)}${bodyParam('body', body)}`
 
-export const outlookUrl = (subject = DEFAULT_EMAIL_SUBJECT) =>
-  `https://outlook.live.com/mail/0/compose?to=${site.contact.email}&subject=${encodeURIComponent(subject)}`
+export const outlookUrl = (subject = DEFAULT_EMAIL_SUBJECT, body) =>
+  `https://outlook.live.com/mail/0/compose?to=${site.contact.email}&subject=${encodeURIComponent(subject)}${bodyParam('body', body)}`
 
 export const meetUrl = () => site.contact.googleMeetRequestUrl || mailtoUrl('Google Meet request')

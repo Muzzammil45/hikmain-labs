@@ -1,7 +1,15 @@
+import { motion } from 'framer-motion'
+import { fadeUp } from '../lib/motion'
+
 export default function Card({ title, children, icon, className = '', contentClassName = '', as: Tag = 'h3' }) {
   return (
-    <div
-      className={`rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-md ${className}`}
+    // The hover lift lives in whileHover (not a Tailwind hover: class) because Framer Motion
+    // keeps its own inline transform on the element once the mount animation settles, and an
+    // inline style always wins over a CSS class trying to touch the same property.
+    <motion.div
+      variants={fadeUp}
+      whileHover={{ y: -4, transition: { duration: 0.2, ease: 'easeOut' } }}
+      className={`rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition-shadow duration-200 hover:shadow-md ${className}`}
     >
       {icon && (
         <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-lg bg-accent/10 text-accent" aria-hidden="true">
@@ -10,7 +18,7 @@ export default function Card({ title, children, icon, className = '', contentCla
       )}
       {title && <Tag className="text-lg font-semibold">{title}</Tag>}
       <div className={`${title ? 'mt-2' : ''} leading-relaxed text-black/75 ${contentClassName}`}>{children}</div>
-    </div>
+    </motion.div>
   )
 }
 

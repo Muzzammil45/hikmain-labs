@@ -1,9 +1,11 @@
+import { motion } from 'framer-motion'
 import Seo from '../components/Seo'
 import PageHero from '../components/PageHero'
 import Section, { SectionHeading } from '../components/Section'
 import Card, { Icon } from '../components/Card'
 import Button from '../components/Button'
 import { site } from '../config/site'
+import { fadeUp } from '../lib/motion'
 
 const formats = [
   { icon: 'user', title: 'One-to-one tutoring', text: 'Focused sessions shaped around your pace, goals and questions.' },
@@ -82,7 +84,7 @@ export default function Tutoring() {
       </Section>
 
       <Section tone="surface" id="academic-integrity">
-        <div className="rounded-2xl border-2 border-accent bg-white p-6 shadow-sm sm:p-10">
+        <motion.div variants={fadeUp} className="rounded-2xl border-2 border-accent bg-white p-6 shadow-sm sm:p-10">
           <div className="flex items-start gap-4">
             <span className="hidden h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-accent/10 text-accent sm:flex" aria-hidden="true">
               <Icon name="shield" />
@@ -94,7 +96,7 @@ export default function Tutoring() {
               </p>
             </div>
           </div>
-        </div>
+        </motion.div>
       </Section>
     </>
   )

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
+import { motion } from 'framer-motion'
 import Seo from '../components/Seo'
 import PageHero from '../components/PageHero'
 import Section from '../components/Section'
@@ -12,6 +13,7 @@ import { mailtoUrl, meetUrl, site, whatsappUrl } from '../config/site'
 import useFormSubmit, { isEmail } from '../hooks/useFormSubmit'
 import { Checkbox, SelectField, TextArea, TextField } from '../components/form/Fields'
 import { Honeypot } from '../components/form/SpamProtection'
+import { fadeUp } from '../lib/motion'
 
 const UNIVERSITY = 'University Tutoring'
 const SCHOOL = 'School, GCSE or A Level Tutoring'
@@ -121,7 +123,7 @@ export default function Contact() {
       </Section>
 
       <Section tone="surface">
-        <div className="mx-auto max-w-2xl">
+        <motion.div variants={fadeUp} className="mx-auto max-w-2xl">
           <h2 className="text-2xl font-bold sm:text-3xl">Or send us a short message</h2>
 
           {status === 'success' ? (
@@ -204,7 +206,7 @@ export default function Contact() {
               </div>
             </form>
           )}
-        </div>
+        </motion.div>
       </Section>
     </>
   )

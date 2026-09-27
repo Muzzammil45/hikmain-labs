@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
 import Seo from '../components/Seo'
 import PageHero from '../components/PageHero'
 import Section from '../components/Section'
@@ -7,6 +8,7 @@ import { site } from '../config/site'
 import useFormSubmit, { isEmail } from '../hooks/useFormSubmit'
 import { Checkbox, Fieldset, FileField, TextArea, TextField } from '../components/form/Fields'
 import { Honeypot } from '../components/form/SpamProtection'
+import { fadeUp } from '../lib/motion'
 
 const infoPoints = [
   'Assignments are offered on a project-by-project basis, depending on client needs.',
@@ -37,6 +39,7 @@ const SENSITIVE_FILE = /passport|driv(er|ing)[\s_-]*licen[cs]e|national[\s_-]*(i
 const required = {
   full_name: 'Please enter your full name.',
   country: 'Please enter your country of residence.',
+  address: 'Please enter your address.',
   timezone: 'Please enter your time zone.',
   availability: 'Please describe your general availability.',
   expertise: 'Please tell us your areas of expertise.',
@@ -79,7 +82,7 @@ export default function JoinNetwork() {
       <PageHero title="Join Our Contractor Network" />
 
       <Section>
-        <div className="mx-auto max-w-3xl">
+        <motion.div variants={fadeUp} className="mx-auto max-w-3xl">
           <p className="rounded-xl border-l-4 border-accent bg-surface p-5 text-lg leading-relaxed">
             HIKMAIN Labs works with skilled independent contractors and freelancers on a
             project-by-project basis. Joining our network is not employment and does not guarantee any
@@ -114,10 +117,16 @@ export default function JoinNetwork() {
                 <TextField label="Preferred name" name="preferred_name" />
               </div>
               <TextField label="Email" name="email" type="email" required autoComplete="email" error={errors.email} />
-              <div className="grid gap-6 sm:grid-cols-2">
-                <TextField label="Country of residence" name="country" required autoComplete="country-name" error={errors.country} />
-                <TextField label="Time zone" name="timezone" required placeholder="e.g. GMT, UTC+5" error={errors.timezone} />
-              </div>
+              <TextField label="Country of residence" name="country" required autoComplete="country-name" error={errors.country} />
+              <TextField
+                label="Address"
+                name="address"
+                required
+                autoComplete="street-address"
+                placeholder="e.g. 123 Main Street, Lagos, Nigeria"
+                error={errors.address}
+              />
+              <TextField label="Time zone" name="timezone" required placeholder="e.g. GMT, UTC+5" error={errors.timezone} />
               <TextField
                 label="General availability"
                 name="availability"
@@ -184,7 +193,7 @@ export default function JoinNetwork() {
               </Button>
             </form>
           )}
-        </div>
+        </motion.div>
       </Section>
     </>
   )

@@ -1,10 +1,12 @@
 import { Fragment } from 'react'
 import { Link, NavLink } from 'react-router-dom'
+import { motion } from 'framer-motion'
 import Seo from '../components/Seo'
 import PageHero from '../components/PageHero'
 import Section from '../components/Section'
 import EmailLink from '../components/EmailLink'
 import { lastUpdated, site } from '../config/site'
+import { fadeUp } from '../lib/motion'
 
 const { legalName, company, contact } = site
 
@@ -117,7 +119,7 @@ export default function Policies({ slug }) {
       </PageHero>
 
       <Section>
-        <div className="grid gap-10 lg:grid-cols-4">
+        <motion.div variants={fadeUp} className="grid gap-10 lg:grid-cols-4">
           {/* Policy navigation: tabs on small screens, sticky list on large screens */}
           <nav aria-label="Policies" className="lg:col-span-1">
             <ul className="flex flex-wrap gap-2 lg:sticky lg:top-24 lg:flex-col lg:gap-1">
@@ -163,7 +165,7 @@ export default function Policies({ slug }) {
               Questions about this page? <Link to="/contact">Contact us</Link>.
             </p>
           </article>
-        </div>
+        </motion.div>
       </Section>
     </>
   )
