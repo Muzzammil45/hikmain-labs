@@ -18,6 +18,7 @@ const sec = (heading, paragraphs = [], bullets = []) => ({ heading, paragraphs, 
 const policies = {
   privacy: {
     title: 'Privacy Notice',
+    updated: '27 September 2026', // amended for Elevate Tuition referrals
     description: `How ${legalName} handles personal data when you visit our website, contact us or use our services.`,
     sections: [
       sec('Who we are', [
@@ -38,6 +39,10 @@ const policies = {
       ]),
       sec('Who may receive personal data', [
         'Access is limited to people and service providers who reasonably need the information for the relevant purpose. This may include HIKMAIN personnel, authorised independent contractors working on an accepted service, website hosting and technology providers, analytics providers, professional advisers, payment providers and public authorities where disclosure is legally required. Contractors receive only information reasonably necessary for authorised work and are expected to follow applicable confidentiality and security requirements.',
+        `For school and GCSE tutoring referrals, we share contact information with our partner ${site.elevate.name} to process your request.`,
+      ]),
+      sec(`${site.elevate.name} Referrals`, [
+        `When you complete our ${site.elevate.name} referral form, we collect your information to pass to Elevate so they can contact you about tutoring. If you are under 18, a parent or guardian should complete this form. Elevate processes this data under their own privacy terms.`,
       ]),
       sec('International transfers', [
         'HIKMAIN may work with independent contractors and service providers located outside the United Kingdom. Where UK personal data is transferred internationally, HIKMAIN will take appropriate steps required by applicable data-protection law, which may include using an adequacy arrangement or approved contractual safeguards where required.',
@@ -107,7 +112,7 @@ export default function Policies({ slug }) {
     <>
       <Seo title={policy.title} description={policy.description} />
       <PageHero title={policy.title}>
-        <p className="text-sm text-white/80">Last updated: {lastUpdated}</p>
+        <p className="text-sm text-white/80">Last updated: {policy.updated || lastUpdated}</p>
       </PageHero>
 
       <Section>

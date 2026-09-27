@@ -62,7 +62,6 @@ export default function Contact() {
   const wa = whatsappUrl()
   const [service, setService] = useState(() => matchService(params.get('service')))
   const isSchool = service === SCHOOL
-  const elevateWhatsapp = site.elevate.whatsappUrl
 
   return (
     <>
@@ -155,11 +154,8 @@ export default function Contact() {
                       For school and pre-university tutoring, please contact {site.elevate.name} directly. They
                       are an independent tutoring partner with their own pricing, terms and privacy policy.
                     </p>
-                    <Button
-                      className="mt-4 w-full sm:w-auto"
-                      href={elevateWhatsapp || site.elevate.url}
-                    >
-                      {elevateWhatsapp ? `Message ${site.elevate.name} on WhatsApp` : `Visit ${site.elevate.name}`}
+                    <Button className="mt-4 w-full sm:w-auto" to="/elevate-referral">
+                      Get Started
                     </Button>
                   </div>
                 )}

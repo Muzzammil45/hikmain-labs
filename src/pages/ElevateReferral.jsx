@@ -9,7 +9,7 @@ import useFormSubmit, { isEmail } from '../hooks/useFormSubmit'
 import { SelectField, TextField } from '../components/form/Fields'
 import { Honeypot } from '../components/form/SpamProtection'
 
-const grades = ['KS1', 'KS3', 'GCSE', 'A Level']
+const grades = ['KS1', 'KS2', 'KS3', 'GCSE', 'A Level']
 const REDIRECT_DELAY_MS = 2000 // long enough to read the confirmation message
 
 function validate(data) {
