@@ -92,9 +92,6 @@ export default function JoinNetwork() {
               <li key={p}>{p}</li>
             ))}
           </ul>
-          <p className="mt-4">
-            Read the full <Link to="/contractor-notice">Contractor Network Notice</Link>.
-          </p>
 
           <h2 id="apply" className="mt-14 text-2xl font-bold">Application form</h2>
 

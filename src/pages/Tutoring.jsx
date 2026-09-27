@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import Seo from '../components/Seo'
 import PageHero from '../components/PageHero'
 import Section, { SectionHeading } from '../components/Section'
@@ -92,9 +91,6 @@ export default function Tutoring() {
               <h2 className="text-2xl font-bold sm:text-3xl">Academic integrity</h2>
               <p className="mt-4 text-lg font-medium leading-relaxed">
                 {site.academicIntegrityStatement}
-              </p>
-              <p className="mt-4">
-                Read our full <Link to="/academic-integrity">Academic Integrity Policy</Link>.
               </p>
             </div>
           </div>

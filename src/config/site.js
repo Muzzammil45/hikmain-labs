@@ -14,7 +14,7 @@ export const site = {
   domain: '[DOMAIN TO BE UPDATED]', // e.g. https://www.hikmainlabs.co.uk
   tagline: 'Skilled support built around your project',
 
-  // Shown on the Tutoring page and at the top of the Academic Integrity Policy.
+  // Shown on the Tutoring page.
   academicIntegrityStatement:
     'HIKMAIN Labs supports genuine learning. Tutors explain concepts, give feedback and help students practice, but do not sit examinations, impersonate students or complete assessed work for submission as the student’s own.',
 
@@ -64,14 +64,36 @@ export const site = {
     },
   ],
 
-  // Footer / policy links.
+  // Policy pages. `short` is the label used in the footer's bottom bar.
   policyLinks: [
-    { label: 'Privacy Notice', to: '/privacy' },
-    { label: 'Cookie Policy', to: '/cookies' },
-    { label: 'Terms of Use', to: '/terms' },
-    { label: 'Academic Integrity Policy', to: '/academic-integrity' },
-    { label: 'Contractor Network Notice', to: '/contractor-notice' },
-    { label: 'Accessibility Statement', to: '/accessibility' },
+    { label: 'Privacy Notice', short: 'Privacy', to: '/privacy' },
+    { label: 'Terms of Use', short: 'Terms of Use', to: '/terms' },
+  ],
+
+  // Footer content.
+  footerDescription:
+    'HIKMAIN Labs provides flexible AI project support, digital assistance and personalised tutoring through a managed network of independent professionals. University tutoring is delivered by HIKMAIN Labs, with school and sixth-form support through our partner, Elevate Tuition.',
+
+  footerColumns: [
+    {
+      title: 'Services',
+      links: [
+        { label: 'Project Support', to: '/project-support' },
+        { label: 'AI and data support', to: '/project-support#ai' },
+        { label: 'Research support', to: '/project-support#research' },
+        { label: 'Ongoing remote support', to: '/project-support#ongoing' },
+        { label: 'Tutoring', to: '/tutoring' },
+      ],
+    },
+    {
+      title: 'Company',
+      links: [
+        { label: 'About', to: '/about' },
+        { label: 'How It Works', to: '/how-it-works' },
+        { label: 'Join Our Network', to: '/join' },
+        { label: 'Contact', to: '/contact' },
+      ],
+    },
   ],
 
   nav: [

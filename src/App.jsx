@@ -12,7 +12,7 @@ import JoinNetwork from './pages/JoinNetwork'
 import Contact from './pages/Contact'
 import Policies from './pages/Policies'
 
-const policySlugs = ['privacy', 'cookies', 'terms', 'academic-integrity', 'contractor-notice', 'accessibility']
+const policySlugs = ['privacy', 'terms']
 
 function NotFound() {
   return (

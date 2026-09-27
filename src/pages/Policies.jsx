@@ -57,31 +57,6 @@ const policies = {
     ],
   },
 
-  cookies: {
-    title: 'Cookie Policy',
-    description: `How the ${site.name} website uses cookies and similar technologies.`,
-    intro: "This policy explains how HIKMAIN's website uses cookies and similar storage/access technologies.",
-    sections: [
-      sec('Types of technologies', [], [
-        'Strictly necessary technologies: required for core website operation, security, network delivery or remembering a visitor’s cookie preference. These are limited to what is genuinely necessary.',
-        'Analytics technologies: HIKMAIN plans to use Google Analytics and Vercel Analytics to understand website traffic and how visitors use the site so that performance and content can be improved.',
-        'Marketing technologies: none are currently used.',
-      ]),
-      sec('Google Analytics', [
-        'Google Analytics may use cookies and related technologies to measure visits and interactions. Where it is used, it will only run after a visitor has agreed to non-essential analytics.',
-      ]),
-      sec('Vercel Analytics', [
-        'Vercel Analytics is used for website performance and usage insights. We describe here what the live implementation actually does, rather than assuming a cookie is present.',
-      ]),
-      sec('Visitor choices', [
-        'Non-essential storage or access technologies are not activated until a visitor has made the choice required by applicable UK rules. Visitors can reject non-essential technologies as easily as they can accept them and can revisit their preferences later. Browser controls can also be used to block or delete cookies.',
-      ]),
-      sec('Changes to this policy', [
-        'We update this policy whenever analytics, advertising, embedded media or other tracking technologies change.',
-      ]),
-    ],
-  },
-
   terms: {
     title: 'Website Terms of Use',
     description: `Terms for using the ${site.name} website.`,
@@ -107,92 +82,6 @@ const policies = {
       sec('Reporting misuse', [`Suspected website abuse, security issues or misuse can be reported to ${contact.email}.`]),
       sec('Governing law', [
         'These website Terms of Use are governed by the laws of England and Wales, subject to any mandatory rights that apply to a visitor and cannot legally be excluded.',
-      ]),
-    ],
-  },
-
-  'academic-integrity': {
-    title: 'Academic Integrity Policy',
-    description: `${site.name} supports genuine learning. Read what tutoring support we do and do not provide.`,
-    statement: true,
-    intro:
-      "HIKMAIN supports learning. Our tutoring and academic-support services are intended to help students understand material, develop skills and improve their own work - not to replace the student's authorship, identity or responsibility.",
-    sections: [
-      sec('Permitted support', [], [
-        'Teaching and explaining concepts, including university-level material.',
-        'Revision sessions, study planning, practice questions and worked examples created for learning.',
-        "Reviewing a student's own draft and providing feedback, explanations and suggestions for improvement.",
-        'Helping students understand assignment instructions, marking criteria, research methods, referencing principles and study techniques.',
-        "Proofreading or language feedback where this remains consistent with the student's institution rules and does not replace the student's substantive work.",
-        'General educational guidance and skills development.',
-      ]),
-      sec('Support we will not provide', [], [
-        'Writing or completing assessed essays, reports, dissertations, assignments or other submissions for a student to present as their own.',
-        "Sitting, taking or completing an examination, test, quiz, interview or other assessment on another person's behalf.",
-        "Impersonating a student or using a student's account to misrepresent who completed assessed work.",
-        'Creating fabricated research, references, results or evidence, or knowingly assisting plagiarism.',
-        'Helping a person evade academic-integrity controls or conceal prohibited assistance.',
-      ]),
-      sec('Right to refuse or stop work', [
-        "HIKMAIN may refuse, pause or terminate a tutoring or academic-support request where we reasonably believe the requested work would breach this policy, an institution's academic-integrity rules, applicable law, or a third-party platform's legitimate requirements.",
-      ]),
-      sec('Misconduct discovered after payment', [
-        'If prohibited conduct is discovered after payment or after work has begun, HIKMAIN may stop the affected service. Any refund or amount due will be considered according to the work legitimately performed, the applicable client terms and the circumstances of the breach. Payment does not create a right to receive prohibited assistance.',
-      ]),
-      sec('Student responsibility', [
-        'Students remain responsible for understanding and complying with the rules of their university, college, course, examination body or other institution, including any rules on AI-assisted work, proofreading, collaboration and tutoring.',
-      ]),
-    ],
-  },
-
-  'contractor-notice': {
-    title: 'Contractor Network Notice',
-    description: `How ${site.name} works with independent contractors and freelancers.`,
-    intro: 'HIKMAIN uses a network of independent contractors to support certain AI, technology, project and related services.',
-    sections: [
-      sec('Independent status', [
-        'Contractors are engaged on an independent-contractor basis and are not employees merely because they perform work for HIKMAIN or its clients. HIKMAIN does not guarantee a minimum amount of work, number of projects, working hours or earnings. Contractors may accept or decline new assignments and may generally provide services to other businesses, subject to confidentiality, security and accepted project obligations.',
-      ]),
-      sec('Projects, fees and invoices', [
-        "Project scope, rates, deadlines and other project-specific requirements may be agreed separately. Contractors are normally expected to invoice HIKMAIN for amounts due for accepted work. Payment timing, currency and method are governed by the contractor's agreement and any applicable project-specific terms.",
-      ]),
-      sec('Benefits and taxes', [
-        'Independent contractors are not entitled under the contractor arrangement to employee benefits such as paid holiday, sick pay, pension contributions or guaranteed wages. Contractors are generally responsible for their own tax, registration and statutory obligations in the jurisdiction in which they operate, subject to any legal reporting or withholding obligations that apply to HIKMAIN.',
-      ]),
-      sec('Client and data protection', [
-        'Contractors may receive access to client information, systems or credentials only where reasonably necessary for authorised work. They are expected to comply with confidentiality, data-protection, security, account-access and intellectual-property requirements applicable to their engagement.',
-      ]),
-      sec('No authority to bind HIKMAIN', [
-        'A contractor cannot enter into a contract or financial commitment on behalf of HIKMAIN, or represent themselves as a director or employee of HIKMAIN, unless expressly authorised in writing.',
-      ]),
-    ],
-  },
-
-  accessibility: {
-    title: 'Accessibility Statement',
-    description: `${site.name}'s commitment to an accessible website.`,
-    intro: 'HIKMAIN wants its website to be usable by as many people as reasonably possible, including people who use assistive technologies.',
-    sections: [
-      sec('Accessibility target', [
-        'The website is designed and maintained with WCAG 2.2 Level AA as the accessibility target. This statement describes a target, not a certification that every page currently conforms.',
-      ]),
-      sec('Measures for the website', [], [
-        'Use clear heading structures, readable text and meaningful link labels.',
-        'Provide keyboard-accessible navigation and controls.',
-        'Provide text alternatives for meaningful images where appropriate.',
-        'Maintain sufficient visual contrast and visible focus indicators.',
-        'Ensure forms have clear labels, instructions and understandable error messages.',
-        'Avoid relying only on colour, sound or pointer interaction to communicate essential information.',
-        'Test important pages and forms across common screen sizes and interaction methods.',
-      ]),
-      sec('Known limitations', [
-        "No specific accessibility limitations have yet been formally documented. Third-party embedded services may have accessibility characteristics outside HIKMAIN's direct control.",
-      ]),
-      sec('Feedback', [
-        `If a visitor experiences an accessibility problem or needs information in a different format, they can contact HIKMAIN at ${contact.email} or ${contact.phone}. Please include the page or feature involved and a description of the problem where possible.`,
-      ]),
-      sec('Ongoing improvement', [
-        'HIKMAIN will review accessibility as the website evolves and will aim to address material barriers identified through testing or user feedback.',
       ]),
     ],
   },
@@ -246,19 +135,8 @@ export default function Policies({ slug }) {
           </nav>
 
           <article className="max-w-3xl lg:col-span-3">
-            {policy.statement && (
-              <p className="rounded-xl border-2 border-accent p-5 text-lg font-medium leading-relaxed">
-                {site.academicIntegrityStatement}
-              </p>
-            )}
-            {policy.intro && (
-              <p className={`${policy.statement ? 'mt-6' : ''} text-lg leading-relaxed text-black/80`}>
-                {policy.intro}
-              </p>
-            )}
-
             {policy.sections.map((s) => (
-              <section key={s.heading} id={slugify(s.heading)} className="mt-9 scroll-mt-24">
+              <section key={s.heading} id={slugify(s.heading)} className="mt-9 scroll-mt-24 first:mt-0">
                 <h2 className="text-xl font-semibold sm:text-2xl">{s.heading}</h2>
                 {s.paragraphs.map((p) => (
                   <p key={p} className="mt-3 leading-relaxed text-black/80">
