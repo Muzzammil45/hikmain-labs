@@ -10,6 +10,7 @@ import HowItWorks from './pages/HowItWorks'
 import About from './pages/About'
 import JoinNetwork from './pages/JoinNetwork'
 import Contact from './pages/Contact'
+import ElevateReferral from './pages/ElevateReferral'
 import Policies from './pages/Policies'
 
 const policySlugs = ['privacy', 'terms']
@@ -38,6 +39,7 @@ export default function App() {
         <Route path="about" element={<About />} />
         <Route path="join" element={<JoinNetwork />} />
         <Route path="contact" element={<Contact />} />
+        <Route path="elevate-referral" element={<ElevateReferral />} />
         {policySlugs.map((slug) => (
           <Route key={slug} path={slug} element={<Policies slug={slug} />} />
         ))}

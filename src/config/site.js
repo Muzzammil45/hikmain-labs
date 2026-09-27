@@ -40,12 +40,16 @@ export const site = {
   forms: {
     contactEndpoint: 'https://formspree.io/f/xdekwbrj',
     applicationEndpoint: 'https://formspree.io/f/maenpvrz',
+    // Elevate referral pre-form: captures details before sending visitors on to Elevate Tuition.
+    elevateReferralEndpoint: 'https://formspree.io/f/mezjwoq',
   },
 
   // Elevate Tuition: independent partner for school, GCSE and A Level tutoring.
   elevate: {
     name: 'Elevate Tuition',
     url: 'https://elevatetuition.online/',
+    // Where the referral pre-form sends visitors once their details have been recorded.
+    referralUrl: 'https://elevatetuition.online/?ref=hikmain',
     // Full wa.me link (with pre-filled message) to Elevate's WhatsApp.
     whatsappUrl:
       'https://wa.me/447533469509?text=Hi%20Elevate%20Tuition%2C%20I%20was%20referred%20through%20the%20HIKMAIN%20Labs%20website%20and%20would%20like%20to%20ask%20about%20tutoring.',

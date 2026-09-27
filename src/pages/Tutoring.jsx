@@ -39,8 +39,8 @@ export default function Tutoring() {
           <li className="flex flex-col">
             <Card title="School, GCSE & A Level Tutoring" icon={<Icon name="group" />} className="flex-1">
               <p>Expert pre-university support from KS1 to A Level, delivered by {site.elevate.name}</p>
-              <Button href={site.elevate.url} variant="secondary" className="mt-6 w-full sm:w-auto">
-                Visit {site.elevate.name}
+              <Button to="/elevate-referral" variant="secondary" className="mt-6 w-full sm:w-auto">
+                Get Started
               </Button>
             </Card>
             <p className="mt-3 text-sm leading-relaxed text-black/70">
