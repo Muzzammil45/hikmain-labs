@@ -1,4 +1,4 @@
-export default function Card({ title, children, icon, className = '', as: Tag = 'h3' }) {
+export default function Card({ title, children, icon, className = '', contentClassName = '', as: Tag = 'h3' }) {
   return (
     <div
       className={`rounded-xl border border-slate-200 bg-white p-6 shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-md ${className}`}
@@ -9,7 +9,7 @@ export default function Card({ title, children, icon, className = '', as: Tag = 
         </div>
       )}
       {title && <Tag className="text-lg font-semibold">{title}</Tag>}
-      <div className={`${title ? 'mt-2' : ''} leading-relaxed text-black/75`}>{children}</div>
+      <div className={`${title ? 'mt-2' : ''} leading-relaxed text-black/75 ${contentClassName}`}>{children}</div>
     </div>
   )
 }

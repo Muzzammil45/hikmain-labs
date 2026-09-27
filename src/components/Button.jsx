@@ -1,13 +1,14 @@
 import { Link } from 'react-router-dom'
 
 const base =
-  'no-underline inline-flex items-center justify-center gap-2 rounded-lg px-5 py-3 text-base font-semibold transition duration-200 ease-out hover:-translate-y-0.5 active:translate-y-0 focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0'
+  'no-underline inline-flex items-center justify-center gap-2 text-center rounded-lg px-5 py-3 text-base font-semibold transition duration-200 ease-out hover:-translate-y-0.5 active:translate-y-0 focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0'
 
 const variants = {
-  primary: 'bg-action text-white shadow-sm hover:bg-blue-700 hover:shadow-md',
+  // Filled variants carry a transparent 2px border so every button has the same height as the outlined ones
+  primary: 'border-2 border-transparent bg-action text-white shadow-sm hover:bg-blue-700 hover:shadow-md',
   secondary: 'border-2 border-action bg-white text-action hover:bg-blue-50',
   // For use on dark (primary-coloured) backgrounds
-  light: 'bg-white text-primary shadow-sm hover:bg-surface',
+  light: 'border-2 border-transparent bg-white text-primary shadow-sm hover:bg-surface',
   outlineLight: 'border-2 border-white/70 text-white hover:bg-white/10',
 }
 

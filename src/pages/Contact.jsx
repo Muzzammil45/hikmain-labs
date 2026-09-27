@@ -36,6 +36,23 @@ function validate(data) {
   return errors
 }
 
+/** Contact option card: text at the top, action button pinned to the bottom so buttons line up across cards. */
+function ContactCard({ icon, title, children, action }) {
+  return (
+    <li>
+      <Card
+        title={title}
+        icon={<Icon name={icon} />}
+        className="flex h-full flex-col"
+        contentClassName="flex flex-1 flex-col justify-between gap-6"
+      >
+        <div>{children}</div>
+        {action}
+      </Card>
+    </li>
+  )
+}
+
 export default function Contact() {
   const [params] = useSearchParams()
   const { status, errors, formError, onSubmit } = useFormSubmit({
@@ -60,37 +77,46 @@ export default function Contact() {
 
       <Section>
         <h2 className="sr-only">Ways to get in touch</h2>
-        <ul className="grid gap-5 md:grid-cols-3">
-          <li>
-            <Card title="WhatsApp" icon={<Icon name="chat" />} className="h-full">
-              <p>Message us on WhatsApp Business for a quick, informal first conversation.</p>
-              <Button className="mt-4" variant="primary" {...(wa ? { href: wa } : { href: mailtoUrl('WhatsApp request') })}>
+        <ul className="grid gap-5 lg:grid-cols-3">
+          <ContactCard
+            icon="chat"
+            title="WhatsApp"
+            action={
+              <Button className="w-full" variant="primary" href={wa || mailtoUrl('WhatsApp request')}>
                 {wa ? 'Chat on WhatsApp' : 'Request a WhatsApp chat'}
               </Button>
-            </Card>
-          </li>
-          <li>
-            <Card title="Google Meet" icon={<Icon name="video" />} className="h-full">
-              <p>Prefer to talk face to face? Request a Google Meet call at a time that suits you.</p>
-              <Button className="mt-4" variant="secondary" href={meetUrl()}>
+            }
+          >
+            <p>Message us on WhatsApp Business for a quick, informal first conversation.</p>
+          </ContactCard>
+          <ContactCard
+            icon="video"
+            title="Google Meet"
+            action={
+              <Button className="w-full" variant="secondary" href={meetUrl()}>
                 Request a Google Meet
               </Button>
-            </Card>
-          </li>
-          <li>
-            <Card title="Email" icon={<Icon name="mail" />} className="h-full">
-              <p>
-                Write to us at{' '}
-                <a href={`mailto:${site.contact.email}`} className="break-all font-medium text-action underline">
-                  {site.contact.email}
-                </a>
-                .
-              </p>
-              <Button className="mt-4" variant="secondary" href={mailtoUrl()}>
+            }
+          >
+            <p>Prefer to talk face to face? Request a Google Meet call at a time that suits you.</p>
+          </ContactCard>
+          <ContactCard
+            icon="mail"
+            title="Email"
+            action={
+              <Button className="w-full" variant="secondary" href={mailtoUrl()}>
                 Send an email
               </Button>
-            </Card>
-          </li>
+            }
+          >
+            <p>
+              Write to us at{' '}
+              <a href={`mailto:${site.contact.email}`} className="break-words font-medium text-action underline">
+                {site.contact.email}
+              </a>
+              .
+            </p>
+          </ContactCard>
         </ul>
       </Section>
 
