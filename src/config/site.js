@@ -41,7 +41,7 @@ export const site = {
     contactEndpoint: 'https://formspree.io/f/xdekwbrj',
     applicationEndpoint: 'https://formspree.io/f/maenpvrz',
     // Elevate referral pre-form: captures details before sending visitors on to Elevate Tuition.
-    elevateReferralEndpoint: 'https://formspree.io/f/mezjwoq',
+    elevateReferralEndpoint: 'https://formspree.io/f/mzezjwoq',
   },
 
   // Elevate Tuition: independent partner for school, GCSE and A Level tutoring.
