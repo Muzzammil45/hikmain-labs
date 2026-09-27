@@ -25,6 +25,7 @@ export function Icon({ name }) {
     chat: 'M21 12a8 8 0 01-11.5 7.2L4 20l1-4.5A8 8 0 1121 12z',
     mail: 'M4 6h16v12H4zM4 7l8 6 8-6',
     phone: 'M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z',
+    copy: 'M4 4h11v11H4zM9 9h11v11H9z',
     video: 'M4 7h10v10H4zM14 11l6-3v8l-6-3',
     check: 'M5 13l4 4L19 7',
     user: 'M12 12a4 4 0 100-8 4 4 0 000 8zm-7 8a7 7 0 0114 0',

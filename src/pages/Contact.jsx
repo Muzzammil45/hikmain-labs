@@ -5,6 +5,9 @@ import PageHero from '../components/PageHero'
 import Section from '../components/Section'
 import Card, { Icon } from '../components/Card'
 import Button from '../components/Button'
+import EmailLink from '../components/EmailLink'
+import EmailModal from '../components/EmailModal'
+import useEmailModal from '../hooks/useEmailModal'
 import { mailtoUrl, meetUrl, site, whatsappUrl } from '../config/site'
 import useFormSubmit, { isEmail } from '../hooks/useFormSubmit'
 import { Checkbox, SelectField, TextArea, TextField } from '../components/form/Fields'
@@ -60,6 +63,7 @@ export default function Contact() {
     validate,
   })
   const wa = whatsappUrl()
+  const { open: emailOpen, onClick: emailOnClick, close: emailClose, triggerRef: emailTriggerRef } = useEmailModal()
   const [service, setService] = useState(() => matchService(params.get('service')))
   const isSchool = service === SCHOOL
 
@@ -103,20 +107,17 @@ export default function Contact() {
             icon="mail"
             title="Email"
             action={
-              <Button className="w-full" variant="secondary" href={mailtoUrl()}>
+              <Button ref={emailTriggerRef} className="w-full" variant="secondary" href={mailtoUrl()} onClick={emailOnClick}>
                 Send an email
               </Button>
             }
           >
             <p>
-              Write to us at{' '}
-              <a href={`mailto:${site.contact.email}`} className="break-words font-medium text-action underline">
-                {site.contact.email}
-              </a>
-              .
+              Write to us at <EmailLink className="break-words font-medium text-action underline">{site.contact.email}</EmailLink>.
             </p>
           </ContactCard>
         </ul>
+        <EmailModal open={emailOpen} onClose={emailClose} triggerRef={emailTriggerRef} />
       </Section>
 
       <Section tone="surface">

@@ -3,6 +3,7 @@ import { Link, NavLink } from 'react-router-dom'
 import Seo from '../components/Seo'
 import PageHero from '../components/PageHero'
 import Section from '../components/Section'
+import EmailLink from '../components/EmailLink'
 import { lastUpdated, site } from '../config/site'
 
 const { legalName, company, contact } = site
@@ -94,13 +95,13 @@ const policies = {
 
 const slugify = (text) => text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
 
-/** Renders text, turning any occurrence of the company email into a mailto link. */
+/** Renders text, turning any occurrence of the company email into a clickable EmailLink. */
 function Rich({ text }) {
   const parts = text.split(contact.email)
   return parts.map((part, i) => (
     <Fragment key={i}>
       {part}
-      {i < parts.length - 1 && <a href={`mailto:${contact.email}`}>{contact.email}</a>}
+      {i < parts.length - 1 && <EmailLink>{contact.email}</EmailLink>}
     </Fragment>
   ))
 }

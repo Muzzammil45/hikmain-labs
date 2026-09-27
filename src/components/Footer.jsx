@@ -1,17 +1,19 @@
 import { Link } from 'react-router-dom'
 import Logo from './Logo'
+import EmailLink from './EmailLink'
 import { Icon } from './Card'
 import { site, whatsappUrl } from '../config/site'
 
 const headingClass = 'font-heading text-sm font-semibold uppercase tracking-wider text-teal-300'
 const linkClass = 'text-sm text-white/85 underline-offset-4 transition-colors hover:text-white hover:underline'
+const contactRowClass = `${linkClass} flex items-start gap-3 break-all`
+const contactIconClass = 'mt-0.5 shrink-0 text-teal-300 [&_svg]:h-5 [&_svg]:w-5'
 
 export default function Footer() {
   const wa = whatsappUrl()
   const phoneHref = `tel:${site.contact.phone.replace(/\s/g, '')}`
 
   const contactItems = [
-    { icon: 'mail', label: site.contact.email, href: `mailto:${site.contact.email}` },
     { icon: 'phone', label: site.contact.phone, href: phoneHref },
     wa && { icon: 'chat', label: 'WhatsApp', href: wa, external: true },
   ].filter(Boolean)
@@ -52,14 +54,22 @@ export default function Footer() {
           <div>
             <h2 className={headingClass}>Contact</h2>
             <ul className="mt-4 space-y-3">
+              <li>
+                <EmailLink className={contactRowClass}>
+                  <span className={contactIconClass}>
+                    <Icon name="mail" />
+                  </span>
+                  <span>{site.contact.email}</span>
+                </EmailLink>
+              </li>
               {contactItems.map((item) => (
                 <li key={item.label}>
                   <a
                     href={item.href}
-                    className={`${linkClass} flex items-start gap-3 break-all`}
+                    className={contactRowClass}
                     {...(item.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                   >
-                    <span className="mt-0.5 shrink-0 text-teal-300 [&_svg]:h-5 [&_svg]:w-5">
+                    <span className={contactIconClass}>
                       <Icon name={item.icon} />
                     </span>
                     <span>{item.label}</span>

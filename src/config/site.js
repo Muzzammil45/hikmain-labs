@@ -119,7 +119,17 @@ export const whatsappUrl = (message = 'Hello HIKMAIN Labs, I would like to discu
     ? `https://wa.me/${site.contact.whatsappNumber}?text=${encodeURIComponent(message)}`
     : null
 
-export const mailtoUrl = (subject = 'Enquiry from the HIKMAIN Labs website') =>
+const DEFAULT_EMAIL_SUBJECT = 'Enquiry from the HIKMAIN Labs website'
+
+export const mailtoUrl = (subject = DEFAULT_EMAIL_SUBJECT) =>
   `mailto:${site.contact.email}?subject=${encodeURIComponent(subject)}`
+
+// Compose-in-browser links, offered as alternatives to mailto: from the email options modal
+// (a plain mailto: link silently does nothing if the visitor has no desktop mail client set up).
+export const gmailUrl = (subject = DEFAULT_EMAIL_SUBJECT) =>
+  `https://mail.google.com/mail/?view=cm&to=${site.contact.email}&su=${encodeURIComponent(subject)}`
+
+export const outlookUrl = (subject = DEFAULT_EMAIL_SUBJECT) =>
+  `https://outlook.live.com/mail/0/compose?to=${site.contact.email}&subject=${encodeURIComponent(subject)}`
 
 export const meetUrl = () => site.contact.googleMeetRequestUrl || mailtoUrl('Google Meet request')
