@@ -115,7 +115,7 @@ export function FileField({ label, name, hint, error, accept, ...rest }) {
   )
 }
 
-export function Checkbox({ name, label, error, required = true, children }) {
+export function Checkbox({ name, label, error, required = true, children, ...rest }) {
   const id = useId()
   return (
     <div>
@@ -128,6 +128,7 @@ export function Checkbox({ name, label, error, required = true, children }) {
           className="mt-1 h-5 w-5 shrink-0 rounded border-slate-400 accent-action"
           aria-invalid={!!error}
           aria-describedby={error ? `${id}-error` : undefined}
+          {...rest}
         />
         <label htmlFor={id} className="text-sm leading-relaxed">
           {children || label}

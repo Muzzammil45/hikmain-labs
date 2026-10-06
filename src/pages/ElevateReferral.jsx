@@ -7,12 +7,13 @@ import Section from '../components/Section'
 import Button from '../components/Button'
 import { site } from '../config/site'
 import useFormSubmit, { isEmail } from '../hooks/useFormSubmit'
-import { SelectField, TextField } from '../components/form/Fields'
+import { Checkbox, SelectField, TextField } from '../components/form/Fields'
 import { Honeypot } from '../components/form/SpamProtection'
 import { fadeUp } from '../lib/motion'
 
 const grades = ['KS1', 'KS2', 'KS3', 'GCSE', 'A Level']
 const REDIRECT_DELAY_MS = 2500 // gives the visitor time to read the confirmation before the handoff
+const requiredFields = ['name', 'email', 'phone', 'grade', 'subject']
 
 function validate(data) {
   const errors = {}
@@ -23,11 +24,14 @@ function validate(data) {
   }
   if (!data.get('grade')) errors.grade = 'Please choose a grade or year.'
   if (!String(data.get('subject') || '').trim()) errors.subject = 'Please tell us which subject you are interested in.'
+  if (!data.get('ageConfirmed')) errors.ageConfirmed = 'Please tick this box to continue.'
   return errors
 }
 
 export default function ElevateReferral() {
   const [popupBlocked, setPopupBlocked] = useState(false)
+  const [ageConfirmed, setAgeConfirmed] = useState(false)
+  const [fieldsFilled, setFieldsFilled] = useState(false)
   const { status, errors, formError, onSubmit } = useFormSubmit({
     endpoint: site.forms.elevateReferralEndpoint,
     validate,
@@ -90,6 +94,10 @@ export default function ElevateReferral() {
               method="post"
               action={site.forms.elevateReferralEndpoint}
               onSubmit={onSubmit}
+              onChange={(event) => {
+                const data = new FormData(event.currentTarget)
+                setFieldsFilled(requiredFields.every((name) => String(data.get(name) || '').trim()))
+              }}
               noValidate
               className="relative space-y-6 rounded-2xl bg-white p-5 shadow-sm sm:p-8"
             >
@@ -126,7 +134,22 @@ export default function ElevateReferral() {
                 </p>
               )}
 
-              <Button type="submit" disabled={status === 'sending'} className="w-full sm:w-auto">
+              <Checkbox
+                name="ageConfirmed"
+                checked={ageConfirmed}
+                onChange={(event) => setAgeConfirmed(event.target.checked)}
+                error={errors.ageConfirmed}
+              >
+                I confirm that I am aged 18 or over, or I am the learner&rsquo;s parent or guardian. I understand that
+                HIKMAIN LABS LTD will use and share the information provided with Elevate Tuition to process this
+                tutoring referral.
+              </Checkbox>
+
+              <Button
+                type="submit"
+                disabled={status === 'sending' || !fieldsFilled || !ageConfirmed}
+                className="w-full sm:w-auto"
+              >
                 {status === 'sending' ? 'Sending…' : `Continue to ${site.elevate.name}`}
               </Button>
             </form>
