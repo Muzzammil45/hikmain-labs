@@ -20,7 +20,7 @@ React 19 · Vite 7 · Tailwind CSS 4 · React Router 7 · Framer Motion · Forms
 
 ## Process
 
-Before launch I audited the site against the brief, logged 10 blocking issues (form routing, layout and content bugs), and fixed them through a revision cycle with the client. AI-assisted code was reviewed and corrected before release.
+Before launch I audited the site against the brief, logged 10 blocking issues, and fixed them through a revision cycle with the client. AI-assisted code was reviewed and corrected before release.
 
 ## Run it locally
 
