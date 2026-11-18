@@ -1,0 +1,41 @@
+/** Small stroke icons that inherit the text colour. Decorative unless given a label. */
+const paths = {
+  data: 'M4 19V9m6 10V5m6 14v-7m4 7H2',
+  task: 'M9 11l3 3 8-8M5 5h6M5 12h2M5 19h14',
+  repeat: 'M4 12a8 8 0 0113.5-5.8L20 8m0-4v4h-4M20 12a8 8 0 01-13.5 5.8L4 16m0 4v-4h4',
+  learn: 'M3 9l9-5 9 5-9 5-9-5zm4 3.5V17c0 1 2.2 2 5 2s5-1 5-2v-4.5',
+  search: 'M21 21l-4.3-4.3M17 10a7 7 0 11-14 0 7 7 0 0114 0z',
+  chat: 'M21 12a8 8 0 01-11.5 7.2L4 20l1-4.5A8 8 0 1121 12z',
+  mail: 'M4 6h16v12H4zM4 7l8 6 8-6',
+  phone: 'M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z',
+  copy: 'M4 4h11v11H4zM9 9h11v11H9z',
+  video: 'M4 7h10v10H4zM14 11l6-3v8l-6-3',
+  check: 'M5 13l4 4L19 7',
+  user: 'M12 12a4 4 0 100-8 4 4 0 000 8zm-7 8a7 7 0 0114 0',
+  group: 'M9 11a3 3 0 100-6 3 3 0 000 6zm7 1a2.5 2.5 0 100-5m-13 12a6 6 0 0112 0m2-5a5 5 0 016 5',
+  shield: 'M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6l7-3z',
+  arrow: 'M5 12h14M13 6l6 6-6 6',
+  plus: 'M12 5v14M5 12h14',
+  close: 'M6 6l12 12M18 6L6 18',
+  menu: 'M4 7h16M4 12h16M4 17h16',
+  spark: 'M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5L18 18M6 18l2.5-2.5M15.5 8.5L18 6',
+}
+
+export default function Icon({ name, size = 24, strokeWidth = 1.8, className = '', label }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      width={size}
+      height={size}
+      className={className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...(label ? { role: 'img', 'aria-label': label } : { 'aria-hidden': true })}
+    >
+      <path d={paths[name] || paths.check} />
+    </svg>
+  )
+}

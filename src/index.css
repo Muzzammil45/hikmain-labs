@@ -1,0 +1,430 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------
+   HIKMAIN Pulse design tokens
+   Navy carries everything; teal is the action and highlight colour;
+   sky blue is a secondary light used only in motion and gradients.
+   ------------------------------------------------------------------ */
+@theme {
+  --color-midnight: #050d1f;
+  --color-navy: #0a1b33;
+  --color-deep: #0e2442;
+  --color-royal: #12305a;
+  --color-line: #1e3a66;
+  --color-line-strong: #2a4a7c;
+  --color-teal: #5eead4;
+  --color-teal-ink: #04222a;
+  --color-sky: #7da8ff;
+  --color-cloud: #eef4ff;
+  --color-mist: #d3ddf0;
+  --color-muted: #a9b8d6;
+  --color-faint: #8d9dbd;
+  --color-danger: #fca5a5;
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: "Sora", "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  --ease-out-soft: cubic-bezier(0.2, 0.7, 0.1, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    background: var(--color-midnight);
+  }
+  body {
+    @apply bg-midnight font-sans text-cloud antialiased;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-heading;
+    letter-spacing: -0.03em;
+  }
+  ::selection {
+    background: var(--color-teal);
+    color: var(--color-teal-ink);
+  }
+  /* Body links are always underlined so they don't rely on colour alone */
+  main p a:not(.btn),
+  main li a:not(.btn) {
+    @apply text-teal underline underline-offset-3 hover:text-cloud;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-teal);
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-[1200px] px-5 sm:px-6;
+  }
+  .eyebrow {
+    @apply text-[13px] font-bold tracking-[0.14em] text-teal uppercase;
+  }
+  .h-section {
+    @apply font-heading font-bold leading-[1.06];
+    font-size: clamp(2rem, 4vw, 3.25rem);
+  }
+
+  /* Buttons */
+  .btn {
+    @apply inline-flex min-h-12 items-center justify-center gap-2.5 rounded-full px-6 text-center text-[15px] font-bold no-underline select-none;
+    transition: transform 0.3s var(--ease-out-soft), box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+  }
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+  .btn:active {
+    transform: translateY(0);
+  }
+  .btn:disabled {
+    @apply cursor-not-allowed opacity-60;
+    transform: none;
+  }
+  .btn-primary {
+    @apply bg-teal text-teal-ink;
+  }
+  .btn-primary:hover {
+    @apply text-teal-ink;
+    box-shadow: 0 12px 32px -10px rgb(94 234 212 / 0.6);
+  }
+  .btn-ghost {
+    @apply text-cloud;
+    box-shadow: inset 0 0 0 1.5px var(--color-line-strong);
+  }
+  .btn-ghost:hover {
+    @apply bg-white/5 text-cloud;
+    box-shadow: inset 0 0 0 1.5px var(--color-teal);
+  }
+  .btn-light {
+    @apply bg-cloud text-navy;
+  }
+  .btn-light:hover {
+    @apply text-navy;
+    box-shadow: 0 12px 32px -12px rgb(238 244 255 / 0.5);
+  }
+  .btn-lg {
+    @apply min-h-14 px-7 text-base;
+  }
+
+  /* Light sweep across primary buttons */
+  .shimmer {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .shimmer::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(110deg, transparent 30%, rgb(255 255 255 / 0.55) 50%, transparent 70%);
+    transform: translateX(-120%);
+    animation: shimmer 3.8s ease-in-out 2s infinite;
+    pointer-events: none;
+  }
+
+  /* Surfaces */
+  .panel {
+    @apply rounded-3xl bg-navy/85;
+    box-shadow: inset 0 0 0 1px var(--color-line);
+  }
+  .lift {
+    transition: transform 0.35s var(--ease-out-soft), background-color 0.35s ease, box-shadow 0.35s ease;
+  }
+  .lift:hover {
+    transform: translateY(-6px);
+    background-color: rgb(18 48 90 / 0.65);
+    box-shadow: inset 0 0 0 1px rgb(94 234 212 / 0.45);
+  }
+
+  /* Card with a light that runs around its edge on hover, and tilts toward you */
+  .beam-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 22px;
+    padding: 1.5px;
+    box-shadow: inset 0 0 0 1px var(--color-line);
+    transition: transform 0.45s var(--ease-out-soft), box-shadow 0.45s ease;
+  }
+  .beam-card::before {
+    content: "";
+    position: absolute;
+    inset: -80%;
+    background: conic-gradient(from 0deg, transparent 0 72%, var(--color-teal) 82%, var(--color-sky) 90%, transparent 96%);
+    animation: spin 6s linear infinite;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+  .beam-card:hover::before,
+  .beam-card.beam-on::before {
+    opacity: 1;
+  }
+  .beam-card:hover {
+    transform: perspective(800px) rotateX(4deg) rotateY(-5deg) translateY(-6px);
+    box-shadow: 0 34px 60px -26px rgb(94 234 212 / 0.4);
+  }
+  .beam-card.no-tilt:hover {
+    transform: none;
+    box-shadow: inset 0 0 0 1px var(--color-line);
+  }
+  .beam-card > .beam-inner {
+    position: relative;
+    height: 100%;
+    border-radius: 21px;
+    background: var(--color-navy);
+  }
+
+  .icon-tile {
+    @apply flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-teal/10 text-teal;
+  }
+
+  /* Form controls */
+  .field {
+    @apply block w-full rounded-xl bg-midnight/70 px-4 py-3 text-base text-cloud placeholder:text-faint;
+    box-shadow: inset 0 0 0 1px var(--color-line-strong);
+    transition: box-shadow 0.2s ease;
+  }
+  .field:focus {
+    outline: none;
+    box-shadow: inset 0 0 0 2px var(--color-teal);
+  }
+  .field[aria-invalid="true"] {
+    box-shadow: inset 0 0 0 2px var(--color-danger);
+  }
+  select.field {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235EEAD4' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    background-size: 18px;
+    padding-right: 44px;
+  }
+  select.field option {
+    background: var(--color-navy);
+    color: var(--color-cloud);
+  }
+}
+
+/* ------------------------------------------------------------------
+   Motion
+   ------------------------------------------------------------------ */
+@layer utilities {
+  .word {
+    display: inline-block;
+    animation: word-in 1s var(--ease-out-soft) both;
+  }
+  .fade-in {
+    animation: fade-in 1s ease both;
+  }
+  .stream {
+    stroke-dasharray: 3 46;
+    animation: stream 4s linear infinite;
+  }
+  .halo {
+    animation: halo 4s ease-out infinite;
+  }
+  .breathe {
+    animation: breathe 4s ease-in-out infinite;
+  }
+  .float-slow {
+    animation: float 9s ease-in-out infinite;
+  }
+  .drift {
+    animation: drift 6.5s ease-in-out infinite;
+  }
+  .spin-slow {
+    animation: spin 48s linear infinite;
+  }
+  .spin-slow-reverse {
+    animation: spin 48s linear infinite reverse;
+  }
+  .spin-slower {
+    animation: spin 90s linear infinite;
+  }
+  .live-dot {
+    @apply inline-block h-2 w-2 rounded-full bg-teal;
+    animation: ping 2s infinite;
+  }
+  .marquee {
+    display: flex;
+    width: max-content;
+    animation: marquee 34s linear infinite;
+  }
+  .marquee-mask {
+    mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  }
+  .grad-text {
+    background: linear-gradient(90deg, var(--color-cloud) 0%, var(--color-sky) 30%, var(--color-teal) 50%, var(--color-cloud) 70%);
+    background-size: 250% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: grad-text 7s linear infinite;
+  }
+  .blob-a {
+    animation: blob-a 14s ease-in-out infinite;
+  }
+  .blob-b {
+    animation: blob-b 18s ease-in-out infinite;
+  }
+  .bob {
+    animation: bob 3.5s ease-in-out infinite;
+  }
+  .panel-in {
+    animation: panel-in 0.55s var(--ease-out-soft) both;
+  }
+  .pop-in {
+    animation: pop-in 0.35s cubic-bezier(0.2, 1.4, 0.4, 1) both;
+  }
+
+  /* Scroll reveal. Only hides content when JavaScript is running (html.js), so the
+     pre-rendered HTML is always readable; the observer in useReveal marks each element data-revealed. */
+  .js .reveal {
+    opacity: 0;
+    transform: translateY(40px) scale(0.985);
+    transition: opacity 0.9s var(--ease-out-soft), transform 0.9s var(--ease-out-soft);
+    transition-delay: var(--reveal-delay, 0s);
+  }
+  .js .reveal[data-revealed] {
+    opacity: 1;
+    transform: none;
+  }
+  .js .draw-line {
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 1.8s cubic-bezier(0.6, 0, 0.2, 1) 0.2s;
+  }
+  .js .draw-line[data-revealed] {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes word-in {
+  from {
+    opacity: 0;
+    transform: translateY(55%);
+    filter: blur(10px);
+  }
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+@keyframes shimmer {
+  0% {
+    transform: translateX(-120%);
+  }
+  40%,
+  100% {
+    transform: translateX(120%);
+  }
+}
+@keyframes stream {
+  to {
+    stroke-dashoffset: -245;
+  }
+}
+@keyframes halo {
+  from {
+    transform: scale(0.92);
+    opacity: 0.75;
+  }
+  to {
+    transform: scale(1.9);
+    opacity: 0;
+  }
+}
+@keyframes breathe {
+  50% {
+    box-shadow: 0 0 0 1px rgb(94 234 212 / 0.7), 0 0 90px -6px rgb(94 234 212 / 0.75);
+  }
+}
+@keyframes float {
+  50% {
+    transform: translateY(-12px);
+  }
+}
+@keyframes drift {
+  50% {
+    transform: translate(8px, -12px);
+  }
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes ping {
+  0% {
+    box-shadow: 0 0 0 0 rgb(94 234 212 / 0.7);
+  }
+  70%,
+  100% {
+    box-shadow: 0 0 0 10px rgb(94 234 212 / 0);
+  }
+}
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+@keyframes grad-text {
+  to {
+    background-position: -250% 0;
+  }
+}
+@keyframes blob-a {
+  50% {
+    transform: translate(120px, 40px) scale(1.2);
+  }
+}
+@keyframes blob-b {
+  50% {
+    transform: translate(-140px, -30px) scale(0.85);
+  }
+}
+@keyframes bob {
+  50% {
+    transform: translateY(-4px);
+  }
+}
+@keyframes panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+    filter: blur(6px);
+  }
+}
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+}
+
+/* Visitors who ask their device for less motion get a still, fully visible site. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
+  .js .reveal,
+  .js .draw-line {
+    opacity: 1;
+    transform: none;
+  }
+  .beam-card::before {
+    display: none;
+  }
+}
