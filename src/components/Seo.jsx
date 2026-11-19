@@ -21,9 +21,57 @@ export function buildHead({ title, description, path }) {
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;')
 
+/**
+ * Structured data (schema.org JSON-LD) for the home page. Google reads it to show the
+ * company name instead of the bare domain, the logo, and the contact details in results.
+ * Everything comes from src/config/site.js, so it stays in step with the rest of the site.
+ */
+export function structuredData() {
+  const [street, city, postcode] = site.company.registeredOffice.split(',').map((s) => s.trim())
+  const business = {
+    '@type': 'ProfessionalService',
+    '@id': `${site.domain}/#organization`,
+    name: site.name,
+    legalName: site.legalName,
+    url: `${site.domain}/`,
+    logo: `${site.domain}/logo.png`,
+    image: `${site.domain}/og-image.png`,
+    description: site.description,
+    email: site.contact.email,
+    telephone: site.contact.phone,
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: street,
+      addressLocality: city,
+      postalCode: postcode,
+      addressCountry: 'GB',
+    },
+    identifier: {
+      '@type': 'PropertyValue',
+      propertyID: 'Companies House company number',
+      value: site.company.number,
+    },
+  }
+  const website = {
+    '@type': 'WebSite',
+    '@id': `${site.domain}/#website`,
+    name: site.name,
+    alternateName: ['HIKMAIN', 'Hikmain Labs'],
+    url: `${site.domain}/`,
+    publisher: { '@id': business['@id'] },
+  }
+  // "<" is escaped so the JSON can never close the script tag early.
+  const json = JSON.stringify({ '@context': 'https://schema.org', '@graph': [business, website] }).replace(
+    /</g,
+    '\\u003c',
+  )
+  return `<script type="application/ld+json">${json}</script>`
+}
+
 /** The <head> markup the pre-renderer injects for one page. */
 export function headToHtml({ fullTitle, desc, url, image }, { noindex } = {}) {
   return [
+    url === site.domain ? structuredData() : '',
     `<title>${esc(fullTitle)}</title>`,
     `<meta name="description" content="${esc(desc)}" />`,
     `<link rel="canonical" href="${esc(url)}" />`,
